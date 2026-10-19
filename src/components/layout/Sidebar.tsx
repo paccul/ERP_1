@@ -99,7 +99,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
   const navContent = (
     <div className="flex h-full flex-col bg-[#030712] text-white">
       {/* Brand Header */}
-      <div className="flex h-16 items-center justify-between border-b border-[#374151] px-5">
+      <div className="flex h-16 shrink-0 items-center justify-between border-b border-[#374151] px-5">
         <Link
           href="/dashboard"
           className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59e0b] rounded-lg"
@@ -130,7 +130,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
       </div>
 
       {/* Nav Menu */}
-      <div className="px-3 pt-3 pb-1">
+      <div className="shrink-0 px-3 pt-3 pb-1">
         <span className="text-[10px] font-bold uppercase tracking-wider text-[#6b7280] px-3">
           9 Modul Operasional
         </span>
@@ -178,7 +178,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
       </nav>
 
       {/* Footer System Status */}
-      <div className="border-t border-[#374151] p-3">
+      <div className="shrink-0 border-t border-[#374151] p-3">
         <div className="rounded-lg bg-[#111827] p-3 text-[11px] text-[#9ca3af]">
           <div className="flex items-center justify-between font-medium">
             <span className="text-white">Standar Mabes Polri</span>
@@ -197,7 +197,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
   return (
     <>
       {/* Desktop Permanent Sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r border-[#374151] bg-[#030712] lg:flex lg:flex-col">
+      <aside className="hidden w-64 shrink-0 border-r border-[#374151] bg-[#030712] lg:flex lg:flex-col lg:sticky lg:top-0 lg:h-screen lg:self-start lg:z-30">
         {navContent}
       </aside>
 

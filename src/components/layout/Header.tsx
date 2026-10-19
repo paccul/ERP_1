@@ -32,7 +32,7 @@ export function Header({
   const displayName = userEmail ? userEmail.split("@")[0] : "Operasional";
 
   return (
-    <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-[#374151] bg-[#030712]/95 px-4 backdrop-blur-md lg:px-8">
+    <header className="sticky top-0 z-40 flex h-16 shrink-0 w-full items-center justify-between border-b border-[#374151] bg-[#030712]/95 px-4 backdrop-blur-md lg:px-8">
       {/* Left: Hamburger (mobile) & Breadcrumbs */}
       <div className="flex items-center gap-3">
         <button

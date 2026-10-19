@@ -18,7 +18,7 @@ export function DashboardShell({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-black text-white transition-colors duration-200">
+    <div className="flex h-screen overflow-hidden bg-black text-white transition-colors duration-200">
       {/* Sidebar (Desktop and Mobile) */}
       <Sidebar
         mobileOpen={mobileMenuOpen}
@@ -26,7 +26,7 @@ export function DashboardShell({
       />
 
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col h-full min-w-0 overflow-hidden">
         {/* Header */}
         <Header
           userEmail={userEmail}
