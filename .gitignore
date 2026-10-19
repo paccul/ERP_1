@@ -10,6 +10,7 @@ tsconfig.tsbuildinfo
 /coverage
 /storage/
 test*.php
+scripts/*.png
 
 # Next.js build output
 /.next/

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Menu, LogOut, Shield, User, Loader2 } from "lucide-react";
 import { signOut } from "@/app/login/actions";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface HeaderProps {
   userEmail?: string | null;
@@ -53,16 +54,19 @@ export function Header({
         </div>
       </div>
 
-      {/* Right: Database Status, User Info & Logout Button */}
-      <div className="flex items-center gap-4">
+      {/* Right: Database Status, Theme Toggle, User Info & Logout Button */}
+      <div className="flex items-center gap-3 sm:gap-4">
         {/* Supabase Status Dot */}
         <div className="hidden md:flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium text-emerald-400">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
           <span>Supabase Connected</span>
         </div>
 
+        {/* Theme Toggle (Samping kanan atas sebelum admin) */}
+        <ThemeToggle />
+
         {/* User Profile Info */}
-        <div className="flex items-center gap-3 border-l border-[#374151] pl-4">
+        <div className="flex items-center gap-3 border-l border-[#374151] pl-3 sm:pl-4">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#111827] text-[#f59e0b] ring-1 ring-[#374151]">
             <User className="h-4 w-4" />
           </div>

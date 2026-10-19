@@ -18,7 +18,7 @@ export function DashboardShell({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-black text-white">
+    <div className="flex min-h-screen bg-black text-white transition-colors duration-200">
       {/* Sidebar (Desktop and Mobile) */}
       <Sidebar
         mobileOpen={mobileMenuOpen}
@@ -35,7 +35,7 @@ export function DashboardShell({
         />
 
         {/* Content Body */}
-        <main className="flex-1 overflow-y-auto bg-black p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto bg-black p-4 sm:p-6 lg:p-8 transition-colors duration-200">
           <div className="mx-auto max-w-7xl">{children}</div>
         </main>
       </div>

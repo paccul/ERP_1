@@ -4,6 +4,38 @@
 
 @layer base {
   :root {
+    --background: 210 40% 98%; /* #f8fafc */
+    --foreground: 222 47% 11%; /* #0f172a */
+
+    --card: 0 0% 100%; /* #ffffff */
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 38 92% 50%; /* Amber #f59e0b */
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
     --background: 0 0% 0%;
     --foreground: 210 40% 98%;
 
@@ -31,8 +63,6 @@
     --border: 217 19% 27%; /* #374151 */
     --input: 217 33% 17%;
     --ring: 38 92% 50%;
-
-    --radius: 0.5rem;
   }
 
   * {
@@ -41,27 +71,200 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    background-color: #000000;
-    color: #f9fafb;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Custom scrollbars for dark theme */
+/* ============================================================
+   LIGHT THEME ADAPTATION
+   ============================================================ */
+
+/* Surface backgrounds in Light Mode */
+html:not(.dark) body,
+html.light body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+html:not(.dark) .bg-black,
+html.light .bg-black {
+  background-color: #f8fafc !important;
+}
+
+html:not(.dark) .bg-\[\#000000\],
+html.light .bg-\[\#000000\] {
+  background-color: #f8fafc !important;
+}
+
+/* Card, Header, and Sidebar Containers */
+html:not(.dark) .bg-\[\#030712\],
+html.light .bg-\[\#030712\] {
+  background-color: #ffffff !important;
+}
+
+html:not(.dark) .bg-\[\#030712\]\/95,
+html.light .bg-\[\#030712\]\/95 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Secondary & Input Backgrounds */
+html:not(.dark) .bg-\[\#111827\],
+html.light .bg-\[\#111827\] {
+  background-color: #f1f5f9 !important;
+}
+
+html:not(.dark) .bg-\[\#111827\]\/60,
+html.light .bg-\[\#111827\]\/60 {
+  background-color: rgba(241, 245, 249, 0.6) !important;
+}
+
+html:not(.dark) .bg-\[\#1f2937\],
+html.light .bg-\[\#1f2937\] {
+  background-color: #e2e8f0 !important;
+}
+
+/* Borders */
+html:not(.dark) .border-\[\#374151\],
+html.light .border-\[\#374151\] {
+  border-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .border-\[\#374151\]\/50,
+html.light .border-\[\#374151\]\/50 {
+  border-color: rgba(226, 232, 240, 0.7) !important;
+}
+
+html:not(.dark) .border-\[\#1f2937\],
+html.light .border-\[\#1f2937\] {
+  border-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .ring-\[\#374151\],
+html.light .ring-\[\#374151\] {
+  --tw-ring-color: #e2e8f0 !important;
+}
+
+/* High-Contrast Typography in Light Mode */
+html:not(.dark) .text-white,
+html.light .text-white {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-\[\#f9fafb\],
+html.light .text-\[\#f9fafb\] {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-\[\#9ca3af\],
+html.light .text-\[\#9ca3af\] {
+  color: #475569 !important;
+}
+
+html:not(.dark) .text-\[\#6b7280\],
+html.light .text-\[\#6b7280\] {
+  color: #64748b !important;
+}
+
+/* Exceptions: Preserve contrast on colored buttons and badges */
+html:not(.dark) .bg-\[\#f59e0b\] .text-black,
+html.light .bg-\[\#f59e0b\] .text-black,
+html:not(.dark) button.bg-\[\#f59e0b\],
+html.light button.bg-\[\#f59e0b\] {
+  color: #000000 !important;
+}
+
+html:not(.dark) .text-emerald-400,
+html.light .text-emerald-400 {
+  color: #059669 !important;
+}
+
+html:not(.dark) .text-red-400,
+html.light .text-red-400 {
+  color: #dc2626 !important;
+}
+
+html:not(.dark) .text-amber-400,
+html.light .text-amber-400 {
+  color: #d97706 !important;
+}
+
+/* Native Form Controls in Light Mode */
+html:not(.dark) input,
+html:not(.dark) select,
+html:not(.dark) textarea,
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder,
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Hover States in Light Mode */
+html:not(.dark) .hover\:bg-\[\#111827\]:hover,
+html.light .hover\:bg-\[\#111827\]:hover {
+  background-color: #f1f5f9 !important;
+}
+
+html:not(.dark) .hover\:bg-\[\#1f2937\]:hover,
+html.light .hover\:bg-\[\#1f2937\]:hover {
+  background-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .hover\:text-white:hover,
+html.light .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+/* Table Elements in Light Mode */
+html:not(.dark) thead.bg-\[\#030712\],
+html.light thead.bg-\[\#030712\] {
+  background-color: #f8fafc !important;
+}
+
+html:not(.dark) tbody.bg-\[\#000000\],
+html.light tbody.bg-\[\#000000\] {
+  background-color: #ffffff !important;
+}
+
+/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-::-webkit-scrollbar-track {
+.dark ::-webkit-scrollbar-track {
   background: #030712;
 }
 
-::-webkit-scrollbar-thumb {
+.dark ::-webkit-scrollbar-thumb {
   background: #374151;
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #4b5563;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track,
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb,
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 4px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover,
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
 }
