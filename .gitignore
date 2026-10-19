@@ -48,4 +48,5 @@ Thumbs.db
 # Vercel deployment cache
 .vercel
 
-.vercel
+# Reusable AI Starter Kit Template (Master Extract)
+_starter-kit-template/
