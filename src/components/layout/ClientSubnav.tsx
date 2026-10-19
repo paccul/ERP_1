@@ -1,0 +1,54 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Building2, MapPin, QrCode } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+export function ClientSubnav() {
+  const pathname = usePathname();
+
+  const navItems = [
+    {
+      name: "Klien Mitra",
+      href: "/dashboard/clients",
+      icon: Building2,
+      active: pathname === "/dashboard/clients" || pathname.startsWith("/dashboard/clients/"),
+    },
+    {
+      name: "Lokasi Pos Jaga (Sites)",
+      href: "/dashboard/sites",
+      icon: MapPin,
+      active: pathname === "/dashboard/sites" || pathname.startsWith("/dashboard/sites/"),
+    },
+    {
+      name: "Master Checkpoint Patroli",
+      href: "/dashboard/checkpoints",
+      icon: QrCode,
+      active: pathname === "/dashboard/checkpoints",
+    },
+  ];
+
+  return (
+    <div className="flex items-center gap-2 border-b border-[#374151] pb-3 mb-6 overflow-x-auto">
+      {navItems.map((item) => {
+        const Icon = item.icon;
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
+              item.active
+                ? "bg-[#1f2937] text-[#f59e0b] border border-[#f59e0b]/40 font-semibold shadow-sm"
+                : "text-[#9ca3af] hover:text-[#f9fafb] hover:bg-[#111827]"
+            )}
+          >
+            <Icon className="h-4 w-4" />
+            {item.name}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}

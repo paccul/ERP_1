@@ -1,0 +1,67 @@
+@theme {
+  --color-*: initial;
+
+  /* Permukaan */
+  --color-canvas: #000000;          /* surface.base, 42/42 halaman */
+  --color-sunken: #030712;          /* gray-950: sidebar, latar tabel */
+  --color-raised: #111827;          /* gray-900: kartu, panel, modal */
+  --color-overlay: #1f2937;         /* gray-800: hover baris, dropdown */
+
+  /* Teks */
+  --color-fg-strong: #f3f4f6;       /* gray-100: judul, nilai data */
+  --color-fg: #9ca3af;              /* gray-400: teks badan, label */
+  --color-fg-muted: #94a3b8;        /* slate-400: teks bantuan, metadata */
+  --color-fg-disabled: #64748b;     /* slate-500: HANYA state disabled */
+  --color-fg-on-accent: #030712;    /* teks di atas aksen amber */
+  --color-fg-on-solid: #ffffff;     /* teks di atas indigo-600 dan red-600 */
+
+  /* Garis */
+  --color-line-subtle: #1f2937;     /* pembatas dekoratif: baris tabel, tepi kartu */
+  --color-line-input: #6b7280;      /* tepi field input dan checkbox */
+
+  /* Aksen dan status */
+  --color-accent: #f59e0b;          /* amber-500: aksi utama, fokus, menu aktif */
+  --color-accent-hover: #fbbf24;    /* amber-400 */
+  --color-accent-pressed: #d97706;  /* amber-600: state active (tombol login referensi) */
+  --color-accent-soft: #fffbeb;     /* amber-50: latar badge peringatan */
+  --color-accent-soft-fg: #92400e;  /* amber-800: teks di atas accent-soft */
+  --color-info-solid: #4f46e5;      /* indigo-600: latar tombol sekunder/ badge info */
+  --color-info: #3b82f6;            /* blue-500: teks/ikon informasi */
+  --color-success-soft: #d1fae5;    /* emerald-100: latar badge disetujui */
+  --color-success-soft-fg: #065f46; /* emerald-800 */
+  --color-success: #34d399;         /* emerald-400: teks/ikon sukses */
+  --color-danger: #f87171;          /* red-400: teks error, ikon error */
+  --color-danger-solid: #dc2626;    /* red-600: latar tombol hapus */
+
+  /* Tipografi */
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --text-2xs: 9px;   --text-2xs--line-height: 12px;
+  --text-xs: 10px;   --text-xs--line-height: 14px;
+  --text-sm: 12px;   --text-sm--line-height: 16px;
+  --text-base: 14px; --text-base--line-height: 20px;
+  --text-lg: 16px;   --text-lg--line-height: 24px;
+  --text-xl: 18px;   --text-xl--line-height: 28px;
+  --text-2xl: 24px;  --text-2xl--line-height: 32px;
+  --text-3xl: 30px;  --text-3xl--line-height: 36px;
+
+  /* Radius */
+  --radius-sm: 8px;      /* input, tombol */
+  --radius-md: 12px;     /* kartu, kartu login */
+  --radius-lg: 16px;     /* modal, kartu ringkasan dashboard */
+  --radius-full: 9999px; /* badge, avatar, pil status */
+
+  /* Bayangan */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-overlay: 0 20px 25px -5px rgb(15 23 42 / 0.2), 0 8px 10px -6px rgb(15 23 42 / 0.2);
+  --shadow-accent: 0 10px 15px -3px rgb(217 119 6 / 0.2), 0 4px 6px -4px rgb(217 119 6 / 0.2);
+
+  /* Gerak */
+  --duration-instant: 150ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+}

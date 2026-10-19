@@ -1,0 +1,1 @@
+import{t as e}from"./app-Cq9F5stv.js";var t=e();function n(){return(0,t.jsxs)(`main`,{children:[(0,t.jsx)(`h1`,{children:`Garda ERP`}),(0,t.jsx)(`p`,{children:`Fondasi aplikasi berhasil dimuat.`})]})}export{n as default};
