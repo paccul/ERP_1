@@ -79,6 +79,47 @@ function normalizeTokenName(pathParts: string[]): string {
     .replace(/[^a-z0-9_-]/g, '-');
 }
 
+function resolveAlias(raw: any, rootData: any, depth = 0): any {
+  if (depth > 10 || !raw) return raw;
+  if (typeof raw === 'string') {
+    const trimmed = raw.trim();
+    if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+      const aliasPath = trimmed.slice(1, -1).split('.');
+      let current: any = rootData.tokens || rootData;
+      for (const part of aliasPath) {
+        if (current && typeof current === 'object' && part in current) {
+          current = current[part];
+        } else {
+          current = undefined;
+          break;
+        }
+      }
+      if (current === undefined && rootData.tokens) {
+        current = rootData;
+        for (const part of aliasPath) {
+          if (current && typeof current === 'object' && part in current) {
+            current = current[part];
+          } else {
+            current = undefined;
+            break;
+          }
+        }
+      }
+      if (current !== undefined) {
+        const val = current.$value !== undefined ? current.$value : current.value !== undefined ? current.value : current;
+        return resolveAlias(val, rootData, depth + 1);
+      }
+    }
+  } else if (typeof raw === 'object') {
+    const resolvedObj: any = {};
+    for (const [k, v] of Object.entries(raw)) {
+      resolvedObj[k] = resolveAlias(v, rootData, depth + 1);
+    }
+    return resolvedObj;
+  }
+  return raw;
+}
+
 function parseTokensJson(data: TokensData): ParsedColor[] {
   const colors: ParsedColor[] = [];
   const rootTokens = data.tokens || data;
@@ -96,18 +137,23 @@ function parseTokensJson(data: TokensData): ParsedColor[] {
       const tokenType = String(rawType || '').toLowerCase();
 
       if (tokenType === 'color') {
+        const resolvedValue = resolveAlias(rawValue, data);
         const name = normalizeTokenName(currentPath);
         let light = '#000000';
         let dark = '#000000';
 
-        if (typeof rawValue === 'object' && rawValue !== null) {
-          const valObj = rawValue as any;
+        if (typeof resolvedValue === 'object' && resolvedValue !== null) {
+          const valObj = resolvedValue as any;
           light = valObj.light || valObj['Light'] || valObj.default || '#000000';
           dark = valObj.dark || valObj['Dark'] || valObj['Dark (Default)'] || valObj.default || '#000000';
-        } else if (typeof rawValue === 'string') {
-          light = rawValue;
-          dark = rawValue;
+        } else if (typeof resolvedValue === 'string') {
+          light = resolvedValue;
+          dark = resolvedValue;
         }
+
+        // Sanitasi: jika alias tidak ditemukan dan menghasilkan {alias}, gunakan fallback aman
+        if (typeof light === 'string' && light.startsWith('{')) light = '#2563EB';
+        if (typeof dark === 'string' && dark.startsWith('{')) dark = '#2563EB';
 
         colors.push({
           name,
