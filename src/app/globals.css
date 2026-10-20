@@ -16,7 +16,7 @@
     --color-border-default: #CBD5E1;
     --color-text-primary: #0F172A;
     --color-text-secondary: #475569;
-    --color-accent-primary: #2563EB;
+    --color-accent-primary: {accent.hover};
     --color-accent-hover: #B45309;
     --color-accent-text-on-amber: #FFFFFF;
     --color-focus-ring: #D97706;
@@ -72,7 +72,7 @@
     --color-border-default: #374151;
     --color-text-primary: #F9FAFB;
     --color-text-secondary: #9CA3AF;
-    --color-accent-primary: #2563EB;
+    --color-accent-primary: {accent.hover};
     --color-accent-hover: #D97706;
     --color-accent-text-on-amber: #000000;
     --color-focus-ring: #F59E0B;
