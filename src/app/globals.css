@@ -25,6 +25,8 @@
     --color-status-danger: #DC2626;
     --primary: 221 83% 53%;
     --ring: 221 83% 53%;
+    --color-accent-primary-rgb: 37 99 235;
+    --color-accent-hover-rgb: 180 83 9;
   /* ==========================================================================
      END FIGMA DESIGN TOKENS
      ========================================================================== */
@@ -37,8 +39,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 38 92% 50%; /* Amber #f59e0b */
-    --primary-foreground: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222 47% 11%;
@@ -46,15 +47,14 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 0 0% 0%;
+    --accent: var(--primary);
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 38 92% 50%;
 
     --radius: 0.5rem;
   }
@@ -81,6 +81,8 @@
     --color-status-danger: #F87171;
     --primary: 221 83% 53%;
     --ring: 221 83% 53%;
+    --color-accent-primary-rgb: 37 99 235;
+    --color-accent-hover-rgb: 217 119 6;
   /* ==========================================================================
      END FIGMA DESIGN TOKENS
      ========================================================================== */
@@ -93,8 +95,7 @@
     --popover: 224 71% 4%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 38 92% 50%; /* Amber #f59e0b */
-    --primary-foreground: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 222 47% 11%; /* #111827 */
     --secondary-foreground: 210 40% 98%;
@@ -102,7 +103,7 @@
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 38 92% 44%; /* #d97706 */
+    --accent: var(--primary);
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -110,7 +111,6 @@
 
     --border: 217 19% 27%; /* #374151 */
     --input: 217 33% 17%;
-    --ring: 38 92% 50%;
   }
 
   * {
@@ -234,13 +234,6 @@ html.light .text-\[\#6b7280\] {
 }
 
 /* Exceptions: Preserve contrast on colored buttons and badges */
-html:not(.dark) .bg-\[\#f59e0b\] .text-black,
-html.light .bg-\[\#f59e0b\] .text-black,
-html:not(.dark) button.bg-\[\#f59e0b\],
-html.light button.bg-\[\#f59e0b\] {
-  color: #000000 !important;
-}
-
 html:not(.dark) .text-emerald-400,
 html.light .text-emerald-400 {
   color: #059669 !important;
@@ -249,11 +242,6 @@ html.light .text-emerald-400 {
 html:not(.dark) .text-red-400,
 html.light .text-red-400 {
   color: #dc2626 !important;
-}
-
-html:not(.dark) .text-amber-400,
-html.light .text-amber-400 {
-  color: #d97706 !important;
 }
 
 /* Native Form Controls in Light Mode */
@@ -335,4 +323,82 @@ html.light ::-webkit-scrollbar-thumb {
 html:not(.dark) ::-webkit-scrollbar-thumb:hover,
 html.light ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8 !important;
+}
+
+/* ============================================================
+   DYNAMIC THEME OVERRIDES (BRIDGES HARDCODED AMBER TO FIGMA TOKENS)
+   ============================================================ */
+
+/* Primary brand background buttons, badges, icons */
+.bg-\[\#f59e0b\],
+button.bg-\[\#f59e0b\],
+.bg-amber-500,
+.bg-amber-400 {
+  background-color: var(--color-accent-primary) !important;
+  color: var(--color-accent-text-on-amber, #ffffff) !important;
+}
+
+/* Hover state */
+.hover\:bg-\[\#d97706\]:hover,
+.hover\:bg-amber-600:hover,
+.hover\:bg-amber-500:hover {
+  background-color: var(--color-accent-hover) !important;
+}
+
+/* Primary text & icons */
+.text-\[\#f59e0b\],
+.text-amber-500,
+.text-amber-400,
+.text-amber-300,
+.group-hover\:text-amber-400:hover,
+.hover\:text-amber-400:hover,
+.hover\:text-amber-500:hover {
+  color: var(--color-accent-primary) !important;
+}
+
+/* Gradient backgrounds (e.g. Sidebar logo, Active module icon, KPI cards) */
+.from-amber-500 {
+  --tw-gradient-from: var(--color-accent-primary) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(var(--color-accent-primary-rgb, 37 99 235) / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.to-amber-400 {
+  --tw-gradient-to: var(--color-accent-hover, var(--color-accent-primary)) var(--tw-gradient-to-position) !important;
+}
+
+/* Shadows */
+.shadow-amber-500\/25,
+.shadow-amber-500\/20 {
+  --tw-shadow-color: rgb(var(--color-accent-primary-rgb, 37 99 235) / 0.35) !important;
+}
+
+/* Translucent tint backgrounds (Badges, stats, alerts) */
+.bg-amber-500\/10,
+.bg-amber-500\/15,
+.bg-amber-500\/20,
+.bg-amber-500\/5,
+.bg-amber-950,
+.bg-amber-950\/80 {
+  background-color: rgb(var(--color-accent-primary-rgb, 37 99 235) / 0.12) !important;
+}
+
+/* Borders */
+.border-\[\#f59e0b\],
+.border-amber-500,
+.border-amber-500\/20,
+.border-amber-500\/30,
+.border-amber-500\/40,
+.border-amber-800,
+.hover\:border-amber-500\/50:hover,
+.hover\:border-amber-500\/30:hover {
+  border-color: rgb(var(--color-accent-primary-rgb, 37 99 235) / 0.3) !important;
+}
+
+/* Focus rings */
+.focus-visible\:ring-\[\#f59e0b\]:focus-visible,
+.focus\:ring-\[\#f59e0b\]:focus,
+.focus-visible\:border-\[\#f59e0b\]:focus-visible {
+  --tw-ring-color: var(--color-accent-primary) !important;
+  border-color: var(--color-accent-primary) !important;
 }
