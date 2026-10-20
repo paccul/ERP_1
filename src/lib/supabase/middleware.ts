@@ -35,8 +35,17 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
-  // Jika unauthenticated dan mengakses /dashboard (atau sub-rute dashboard), redirect ke /login
-  if (!user && (pathname === "/dashboard" || pathname.startsWith("/dashboard/"))) {
+  const isProtectedRoute =
+    pathname === "/dashboard" ||
+    pathname.startsWith("/dashboard/") ||
+    pathname.startsWith("/security") ||
+    pathname.startsWith("/psb") ||
+    pathname.startsWith("/logistics") ||
+    pathname.startsWith("/finance") ||
+    pathname.startsWith("/settings");
+
+  // Jika unauthenticated dan mengakses rute terproteksi, redirect ke /login
+  if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);

@@ -144,7 +144,22 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
           const isActive =
             item.href === "/dashboard"
               ? pathname === "/dashboard"
-              : pathname.startsWith(item.href);
+              : pathname.startsWith(item.href) ||
+                (item.href === "/dashboard/personnel" && pathname.startsWith("/security/personnel")) ||
+                (item.href === "/dashboard/recruitment" && pathname.startsWith("/psb")) ||
+                (item.href === "/dashboard/clients" &&
+                  (pathname.startsWith("/security/clients") ||
+                    pathname.startsWith("/security/sites") ||
+                    pathname.startsWith("/security/checkpoints"))) ||
+                (item.href === "/dashboard/roster" &&
+                  (pathname.startsWith("/security/roster") ||
+                    pathname.startsWith("/security/rostering") ||
+                    pathname.startsWith("/security/bko"))) ||
+                (item.href === "/dashboard/logistics" && pathname.startsWith("/logistics")) ||
+                (item.href === "/dashboard/invoices" && pathname.startsWith("/finance/invoice")) ||
+                (item.href === "/dashboard/payroll" && pathname.startsWith("/finance/payroll")) ||
+                (item.href === "/dashboard/accounting" && pathname.startsWith("/finance/accounting")) ||
+                (item.href === "/dashboard/settings" && pathname.startsWith("/settings"));
           const Icon = item.icon;
 
           return (

@@ -1,0 +1,604 @@
+{
+  "timestamp": "2026-10-20T08:00:51.515Z",
+  "baseUrl": "http://localhost:3000",
+  "totalScanned": 99,
+  "passedCount": 99,
+  "failedCount": 0,
+  "failedRoutes": [],
+  "passedRoutes": [
+    {
+      "route": "/login",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/personnel",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/personnels",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/personnel/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/personnels/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/personnel/edit/d0000000-0000-0000-0000-000000000001",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/clients",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/clients/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/sites",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/sites/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/checkpoints",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/roster",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/rostering",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/roster/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/rostering/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/bko-requests",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/security/bko",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/psb/admin",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/psb/admin/applicants",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/psb/admin/applicant-detail",
+      "status": 200,
+      "title": "Detail Kandidat Pelamar Satpam | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/psb/admin/detail/14",
+      "status": 200,
+      "title": "Detail Kandidat Pelamar Satpam | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/logistics/warehouse",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/logistics/items/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/logistics/items/detail/e0000000-0000-0000-0000-000000000001",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/logistics/items/edit/e0000000-0000-0000-0000-000000000001",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/logistics/distribution",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/logistics/distribute",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/invoices",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/invoice/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/invoices/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/payroll",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/coa",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/coa/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/journals",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/journals/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/ledger",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/general-ledger",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/receivables",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/subsidiary-ledger",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/income-statement",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/profit-loss",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/balance-sheet",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/equity-changes",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/cash-flow",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/management-analysis",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/management",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/finance/accounting/reports/balanced-scorecard",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/institution",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/institution/visual",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/org-chart",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/users",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/users/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/roles",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/roles/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/roles/edit/1",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/backup",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/settings/data",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/personnel",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/personnel/new",
+      "status": 200,
+      "title": "Tambah Personil Baru | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/recruitment",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/clients",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/clients/new",
+      "status": 200,
+      "title": "Registrasi Klien Mitra Baru | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/sites",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/sites/new",
+      "status": 200,
+      "title": "Tambah Lokasi Jaga Baru | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/checkpoints",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/roster",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/roster/new",
+      "status": 200,
+      "title": "Plotting Jadwal Shift Baru | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/bko-requests",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/logistics",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/logistics/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/logistics/distribution",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/logistics/history",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/invoices",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/invoices/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/payroll",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/payroll/new",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/coa",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/coa/new",
+      "status": 200,
+      "title": "Tambah Akun COA Baru | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/journals",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/journals/new",
+      "status": 200,
+      "title": "Input Jurnal Umum Manual | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/ledger",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/receivables",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/reports",
+      "status": 200,
+      "title": "Laporan Keuangan SAK | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/reports/balance-sheet",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/reports/balanced-scorecard",
+      "status": 200,
+      "title": "Balanced Scorecard BUJP | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/reports/cash-flow",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/reports/equity-changes",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/reports/income-statement",
+      "status": 200,
+      "title": "Dashboard Operasional | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/accounting/reports/management-analysis",
+      "status": 200,
+      "title": "Analisa Profitabilitas Pos Jaga | Garda BUJP ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/settings",
+      "status": 200,
+      "title": "Pengaturan Sistem & Profil BUJP | Garda ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/settings/institution",
+      "status": 200,
+      "title": "Profil BUJP & Legalitas SIO Polri | Garda ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/settings/org-chart",
+      "status": 200,
+      "title": "Struktur Organisasi BUJP | Garda ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/settings/users",
+      "status": 200,
+      "title": "Manajemen Pengguna Sistem | Garda ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/settings/users/new",
+      "status": 200,
+      "title": "Tambah Pengguna Baru | Garda ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/settings/roles",
+      "status": 200,
+      "title": "Role & Matriks Izin (RBAC) | Garda ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/settings/roles/new",
+      "status": 200,
+      "title": "Buat Role Baru | Garda ERP",
+      "is404": false
+    },
+    {
+      "route": "/dashboard/settings/backup",
+      "status": 200,
+      "title": "Pajak, Sistem & Backup Data | Garda ERP",
+      "is404": false
+    }
+  ]
+}
