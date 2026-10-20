@@ -1,0 +1,654 @@
+import { chromium } from "playwright";
+import fs from "fs";
+import path from "path";
+
+const htmlContent = `
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>SOP Protap Pos Jaga Satpam - Perpol 01/2023</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: A3 portrait;
+      margin: 0;
+    }
+
+    body {
+      width: 1414px;
+      height: 2000px;
+      background-color: #07090E;
+      color: #F3F4F6;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 70px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Architectural Background Grids & Reticles */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 50px 50px, 50px 50px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .corner-reticle {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      z-index: 2;
+    }
+    .top-left { top: 30px; left: 35px; border-right: none; border-bottom: none; }
+    .top-right { top: 30px; right: 35px; border-left: none; border-bottom: none; }
+    .bottom-left { bottom: 30px; left: 35px; border-right: none; border-top: none; }
+    .bottom-right { bottom: 30px; right: 35px; border-left: none; border-top: none; }
+
+    .outer-border {
+      position: absolute;
+      inset: 38px 43px;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .content-wrap {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid rgba(245, 158, 11, 0.35);
+      padding-bottom: 30px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .shield-badge {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 15px 30px rgba(245, 158, 11, 0.3);
+    }
+
+    .shield-badge svg {
+      width: 44px;
+      height: 44px;
+      fill: #07090E;
+    }
+
+    .brand-text h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+
+    .brand-text p {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #F59E0B;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .compliance-stamp {
+      border: 1.5px solid rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.08);
+      border-radius: 12px;
+      padding: 12px 24px;
+      text-align: right;
+    }
+
+    .compliance-stamp .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #34D399;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .compliance-stamp .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+    }
+
+    .compliance-stamp .doc-ref {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #9CA3AF;
+      letter-spacing: 1px;
+    }
+
+    /* Main Poster Headline */
+    .title-banner {
+      text-align: center;
+      margin: 25px 0 35px 0;
+    }
+
+    .title-banner .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #F59E0B;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .title-banner .eyebrow::before,
+    .title-banner .eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 60px;
+      height: 1px;
+      background: rgba(245, 158, 11, 0.5);
+    }
+
+    .title-banner h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 46px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      line-height: 1.15;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .title-banner p {
+      font-size: 15px;
+      color: #9CA3AF;
+      letter-spacing: 1.5px;
+      margin-top: 8px;
+      font-weight: 400;
+    }
+
+    /* 5 Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      flex-grow: 1;
+      margin-bottom: 25px;
+    }
+
+    .pillar-card {
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 24px 28px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .pillar-card.highlight {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.06) 0%, rgba(17, 24, 39, 0.75) 100%);
+    }
+
+    .pillar-card.span-2 {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 22px 28px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: #F59E0B;
+      letter-spacing: 2px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .card-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: #9CA3AF;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .rule-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: #D1D5DB;
+    }
+
+    .rule-marker {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #F59E0B;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .rule-item strong {
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    /* Footer Section */
+    .footer {
+      border-top: 1.5px solid rgba(245, 158, 11, 0.3);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .qr-mock {
+      width: 60px;
+      height: 60px;
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-mock svg {
+      width: 100%;
+      height: 100%;
+      fill: #07090E;
+    }
+
+    .footer-meta {
+      font-size: 12px;
+      color: #9CA3AF;
+      line-height: 1.5;
+    }
+
+    .footer-meta strong {
+      color: #F9FAFB;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .footer-center {
+      text-align: center;
+      font-size: 11px;
+      color: #6B7280;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    .footer-center .legal-notice {
+      color: #F59E0B;
+      font-weight: 700;
+    }
+
+    .signatures {
+      display: flex;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .sig-box {
+      width: 130px;
+    }
+
+    .sig-line {
+      height: 38px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+      margin-bottom: 6px;
+    }
+
+    .sig-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: #F3F4F6;
+      text-transform: uppercase;
+    }
+
+    .sig-role {
+      font-size: 9.5px;
+      color: #9CA3AF;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="corner-reticle top-left"></div>
+  <div class="corner-reticle top-right"></div>
+  <div class="corner-reticle bottom-left"></div>
+  <div class="corner-reticle bottom-right"></div>
+  <div class="outer-border"></div>
+
+  <div class="content-wrap">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand-group">
+        <div class="shield-badge">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.14 8.78-7 9.9-3.86-1.12-7-5.36-7-9.9V6.3l7-3.12zM12 6a4 4 0 0 0-4 4c0 1.93 1.37 3.54 3.2 3.92L10 16h4l-1.2-2.08C14.63 13.54 16 11.93 16 10a4 4 0 0 0-4-4z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h2>PT GARDA NUSANTARA SOLUSINDO</h2>
+          <p>Badan Usaha Jasa Pengamanan (BUJP) Mabes Polri • SIO Operasional 2026</p>
+        </div>
+      </div>
+
+      <div class="compliance-stamp">
+        <div class="pill">
+          <span class="dot"></span>
+          Kepatuhan Mandatori
+        </div>
+        <div class="doc-ref">PERPOL NO. 01 / TAHUN 2023</div>
+      </div>
+    </header>
+
+    <!-- Title Banner -->
+    <div class="title-banner">
+      <div class="eyebrow">STANDAR OPERASIONAL PROSEDUR RESMI</div>
+      <h1>PROSEDUR TETAP (PROTAP) POS JAGA SATUAN PENGAMANAN</h1>
+      <p>Pedoman Mutlak Kesiapsiagaan, Kontrol Akses, Pola Patroli, dan Tanggap Darurat di Seluruh Pos Jaga Mitra</p>
+    </div>
+
+    <!-- 5 Pillars Grid -->
+    <main class="pillars-grid">
+      <!-- Pillar 1 -->
+      <section class="pillar-card highlight">
+        <div class="card-top">
+          <span class="card-id">SEC-01</span>
+          <span class="card-badge">Protokol Pergantian Dinas</span>
+        </div>
+        <h3 class="card-title">Serah Terima Tugas Jaga & Logistik</h3>
+        <ul class="rule-list">
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Hadir 15 Menit Lebih Awal:</strong> Melaksanakan apel serah terima bersama Danru dan memeriksa fisik buku mutasi inventaris.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Pengecekan Kaporlap Pos:</strong> Uji fungsi Radio HT, senter patroli, metal detector, tongkat T, borgol baja, dan kunci master perimeter.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Pencatatan Insiden Terbuka:</strong> Wajib menyampaikan atensi khusus klien, kejadian belum tuntas, dan tamu VIP yang terjadwal.</div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Pillar 2 -->
+      <section class="pillar-card">
+        <div class="card-top">
+          <span class="card-id">SEC-02</span>
+          <span class="card-badge">Sterilisasi Gerbang Utama</span>
+        </div>
+        <h3 class="card-title">Pengendalian Akses & Skrining Tamu</h3>
+        <ul class="rule-list">
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Verifikasi Identitas 100%:</strong> Tahan kartu identitas resmi (KTP/SIM/Paspor), lakukan penukaran Visitor Pass & catat di logbook.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Pemeriksaan Fisik Kendaraan:</strong> Buka bagasi, periksa kaca mobil, dan gunakan cermin inspeksi kolong (mirror inspection) untuk semua mobil.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Larangan Akses Tanpa Izin:</strong> Dilarang meloloskan tamu/kurir tanpa konfirmasi tertulis atau sambungan telepon dari pihak PIC Klien.</div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Pillar 3 -->
+      <section class="pillar-card">
+        <div class="card-top">
+          <span class="card-id">SEC-03</span>
+          <span class="card-badge">Observasi Terjadwal</span>
+        </div>
+        <h3 class="card-title">Pola Patroli & QR Scan Checkpoint</h3>
+        <ul class="rule-list">
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Interval Patroli 60-90 Menit:</strong> Bergerak menyisir seluruh titik perimeter luar, pagar batas, gudang, dan pintu darurat.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Validasi Garda ERP QR Code:</strong> Wajib memindai QR Code di setiap pos patroli dengan koordinat GPS real-time terenkripsi.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Inspeksi Bahaya Fasilitas:</strong> Periksa segel APAR, kebocoran pipa/gas, panel MCB listrik, dan jendela terkunci saat jam non-operasional.</div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Pillar 4 -->
+      <section class="pillar-card highlight">
+        <div class="card-top">
+          <span class="card-id">SEC-04</span>
+          <span class="card-badge">Eskalasi Insidental & BKO</span>
+        </div>
+        <h3 class="card-title">Tanggap Darurat & Komando Insidental</h3>
+        <ul class="rule-list">
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Protokol Kebakaran & Gempa:</strong> Bunyikan alarm gedung, amankan jalur evakuasi, bawa logbook pos, dan arahkan massa ke Titik Kumpul (Assembly Point).</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Penanganan Tindak Kriminal:</strong> Amankan Tempat Kejadian Perkara (Status Quo TKP), jangan sentuh barang bukti, tahan pelaku dengan tangan terikat borgol.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Eskalasi Siaga 1 BKO:</strong> Hubungi Command Center Garda ERP BUJP dan Polsek setempat dalam waktu kurang dari 3 menit sejak bahaya teridentifikasi.</div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Pillar 5 (Span 2 Columns) -->
+      <section class="pillar-card span-2">
+        <div>
+          <div class="card-top" style="margin-bottom: 8px;">
+            <span class="card-id">SEC-05</span>
+            <span class="card-badge">Standar Mabes Polri</span>
+          </div>
+          <h3 class="card-title" style="margin-bottom: 6px;">Sikap Tampang, Disiplin & Etika Profesi</h3>
+          <p style="font-size: 12px; color: #9CA3AF; line-height: 1.4;">
+            Landasan kehormatan profesi Satuan Pengamanan sebagai pengemban fungsi kepolisian terbatas.
+          </p>
+        </div>
+
+        <ul class="rule-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Kerapian Seragam (PDH/PDL):</strong> Baju disetrika rapi, kopelrim mengkilap, sepatu lars disemir, wing kualifikasi Gada, dan KTA aktif selalu tersemat di dada kiri.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Kultur 3S (Senyum, Sapa, Salam):</strong> Berkomunikasi secara santun, tegas, dan berwibawa. Pantang menerima suap, tip, maupun gratifikasi dari pihak mana pun.</div>
+          </li>
+          <li class="rule-item">
+            <span class="rule-marker"></span>
+            <div><strong>Disiplin Mutlak Pos Jaga:</strong> Dilarang tidur saat jaga, dilarang bermain game di ponsel, dan dilarang meninggalkan pos tanpa pengganti sah.</div>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-left">
+        <div class="qr-mock">
+          <svg viewBox="0 0 24 24">
+            <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm14 0h4v2h-4v-2zm-4 0h2v4h-2v-4zm2 4h4v2h-4v-2zm2-2h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h4v2h-4v-2z"/>
+          </svg>
+        </div>
+        <div class="footer-meta">
+          <div>DOKUMEN RESMI: <strong>SOP-POS/BUJP-GNS/2026/01</strong></div>
+          <div>VERIFIKASI INTEGRITAS: <strong>SHA-256 ENCRYPTED BY GARDA ERP</strong></div>
+          <div>PUSAT BANTUAN KOMANDO (24 JAM): <strong>021-8899-7711 / 110</strong></div>
+        </div>
+      </div>
+
+      <div class="footer-center">
+        <div>STANDAR AKREDITASI BUJP NASIONAL</div>
+        <div class="legal-notice">WAJIB DITEMPEL DAN DITAATI DI SELURUH POS JAGA RESMI</div>
+        <div>HAK CIPTA DILINDUNGI HUKUM MABES POLRI</div>
+      </div>
+
+      <div class="signatures">
+        <div class="sig-box">
+          <div class="sig-line"></div>
+          <div class="sig-name">Bambang Wijaya</div>
+          <div class="sig-role">Chief Security Officer</div>
+        </div>
+        <div class="sig-box">
+          <div class="sig-line"></div>
+          <div class="sig-name">M. Fathurrahman</div>
+          <div class="sig-role">Direktur Operasional</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
+`;
+
+async function generatePoster() {
+  console.log("🎨 Generating High-Resolution SOP Pos Jaga Poster (Canvas Design)...");
+  
+  const tmpHtmlPath = path.resolve("public/exports/sop-pos-jaga-canvas.html");
+  fs.writeFileSync(tmpHtmlPath, htmlContent, "utf8");
+
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage({
+    viewport: { width: 1414, height: 2000 },
+    deviceScaleFactor: 2, // 2x scale for ultra-sharp 300 DPI print rendering
+  });
+
+  await page.goto("file://" + tmpHtmlPath, { waitUntil: "networkidle" });
+  await page.evaluateHandle("document.fonts.ready");
+
+  const pngOutPath = path.resolve("public/exports/sop-pos-jaga-perpol-01-2023.png");
+  const pdfOutPath = path.resolve("public/exports/sop-pos-jaga-perpol-01-2023.pdf");
+
+  console.log("📸 Exporting high-res 4K PNG poster...");
+  await page.screenshot({
+    path: pngOutPath,
+    fullPage: true,
+  });
+
+  console.log("📄 Exporting print-ready vector PDF poster (A3)...");
+  await page.pdf({
+    path: pdfOutPath,
+    width: "1414px",
+    height: "2000px",
+    printBackground: true,
+    pageRanges: "1",
+  });
+
+  await browser.close();
+  console.log("🎉 SOP Poster generated successfully!");
+  console.log("PNG Path:", pngOutPath);
+  console.log("PDF Path:", pdfOutPath);
+}
+
+generatePoster().catch((err) => {
+  console.error("❌ Poster generation failed:", err);
+  process.exit(1);
+});
