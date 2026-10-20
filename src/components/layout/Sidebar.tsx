@@ -102,18 +102,18 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
       <div className="flex h-16 shrink-0 items-center justify-between border-b border-[#374151] px-5">
         <Link
           href="/dashboard"
-          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59e0b] rounded-lg"
+          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59e0b] rounded-2xl"
           onClick={onClose}
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#f59e0b] text-black shadow-md">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-400 text-black shadow-lg shadow-amber-500/25">
             <Shield className="h-5 w-5" />
           </div>
           <div>
-            <div className="text-sm font-bold tracking-wider text-white">
-              GARDA ERP
+            <div className="text-sm font-black tracking-wide text-white">
+              GARDA BUJP
             </div>
-            <div className="text-[10px] text-[#9ca3af] font-medium tracking-tight">
-              Sistem Manajemen BUJP
+            <div className="text-[10px] text-[#9ca3af] font-medium">
+              Sistem Manajemen Terpadu
             </div>
           </div>
         </Link>
@@ -130,15 +130,15 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
       </div>
 
       {/* Nav Menu */}
-      <div className="shrink-0 px-3 pt-3 pb-1">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-[#6b7280] px-3">
-          9 Modul Operasional
+      <div className="shrink-0 px-4 pt-3 pb-1.5">
+        <span className="text-[11px] font-semibold text-[#6b7280]">
+          Operasional & Manajemen
         </span>
       </div>
 
       <nav
         aria-label="Navigasi Utama BUJP"
-        className="flex-1 space-y-1 overflow-y-auto px-3 py-1"
+        className="flex-1 space-y-1.5 overflow-y-auto px-3 py-1"
       >
         {bujpModules.map((item) => {
           const isActive =
@@ -154,21 +154,27 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
               onClick={onClose}
               aria-current={isActive ? "page" : undefined}
               className={cn(
-                "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59e0b]",
+                "group flex items-center gap-3 rounded-2xl px-3 py-2 text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59e0b]",
                 isActive
-                  ? "bg-[#f59e0b]/15 text-[#f59e0b] shadow-sm ring-1 ring-[#f59e0b]/40 border-l-2 border-[#f59e0b]"
-                  : "text-[#9ca3af] hover:bg-[#111827] hover:text-white"
+                  ? "bg-[#111827] text-white shadow-sm ring-1 ring-[#374151]"
+                  : "text-[#9ca3af] hover:bg-[#111827]/60 hover:text-white"
               )}
             >
-              <Icon
+              <div
                 className={cn(
-                  "h-4 w-4 shrink-0 transition-transform group-hover:scale-110",
-                  isActive ? "text-[#f59e0b]" : "text-[#6b7280] group-hover:text-white"
+                  "flex h-8 w-8 items-center justify-center rounded-xl shrink-0 transition-all duration-200",
+                  isActive
+                    ? "bg-gradient-to-tr from-amber-500 to-amber-400 text-black shadow-md shadow-amber-500/25"
+                    : "bg-[#111827] text-[#9ca3af] group-hover:bg-[#1f2937] group-hover:text-amber-400"
                 )}
-              />
+              >
+                <Icon className="h-4 w-4" />
+              </div>
               <div className="flex flex-col truncate">
-                <span className="truncate">{item.name}</span>
-                <span className="text-[10px] font-normal text-[#6b7280] truncate">
+                <span className={cn("truncate", isActive ? "font-bold text-white" : "font-medium")}>
+                  {item.name}
+                </span>
+                <span className="text-[10px] text-[#6b7280] truncate font-normal">
                   {item.description}
                 </span>
               </div>
@@ -179,10 +185,10 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
 
       {/* Footer System Status */}
       <div className="shrink-0 border-t border-[#374151] p-3">
-        <div className="rounded-lg bg-[#111827] p-3 text-[11px] text-[#9ca3af]">
+        <div className="rounded-2xl border border-[#374151]/80 bg-[#111827] p-3 text-[11px] text-[#9ca3af] shadow-sm">
           <div className="flex items-center justify-between font-medium">
-            <span className="text-white">Standar Mabes Polri</span>
-            <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[9px] font-bold text-emerald-400">
+            <span className="text-white font-semibold">Standar Mabes Polri</span>
+            <span className="rounded-lg bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold text-emerald-400">
               Perpol 01/2023
             </span>
           </div>

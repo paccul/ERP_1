@@ -109,18 +109,38 @@ html.light .bg-\[\#030712\]\/95 {
 
 /* Secondary & Input Backgrounds */
 html:not(.dark) .bg-\[\#111827\],
-html.light .bg-\[\#111827\] {
+html.light .bg-\[\#111827\],
+html:not(.dark) .bg-\[\#111827\]\/90,
+html.light .bg-\[\#111827\]\/90,
+html:not(.dark) .bg-\[\#111827\]\/80,
+html.light .bg-\[\#111827\]\/80 {
   background-color: #f1f5f9 !important;
 }
 
 html:not(.dark) .bg-\[\#111827\]\/60,
-html.light .bg-\[\#111827\]\/60 {
-  background-color: rgba(241, 245, 249, 0.6) !important;
+html.light .bg-\[\#111827\]\/60,
+html:not(.dark) .bg-\[\#111827\]\/50,
+html.light .bg-\[\#111827\]\/50 {
+  background-color: rgba(241, 245, 249, 0.8) !important;
 }
 
 html:not(.dark) .bg-\[\#1f2937\],
-html.light .bg-\[\#1f2937\] {
-  background-color: #e2e8f0 !important;
+html.light .bg-\[\#1f2937\],
+html:not(.dark) .bg-\[\#1f2937\]\/80,
+html.light .bg-\[\#1f2937\]\/80,
+html:not(.dark) .bg-\[\#1f2937\]\/60,
+html.light .bg-\[\#1f2937\]\/60,
+html:not(.dark) .bg-\[\#1f2937\]\/50,
+html.light .bg-\[\#1f2937\]\/50,
+html:not(.dark) .bg-\[\#1f2937\]\/40,
+html.light .bg-\[\#1f2937\]\/40 {
+  background-color: #f8fafc !important;
+}
+
+/* Text Overrides */
+html:not(.dark) .text-\[\#d1d5db\],
+html.light .text-\[\#d1d5db\] {
+  color: #334155 !important;
 }
 
 /* Borders */
