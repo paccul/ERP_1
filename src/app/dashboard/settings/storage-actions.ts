@@ -77,6 +77,7 @@ export async function uploadCompanyLogo(formData: FormData) {
     }
 
     revalidatePath("/", "layout");
+    revalidatePath("/dashboard", "layout");
     revalidatePath("/dashboard/settings");
     revalidatePath("/dashboard/settings/institution");
 
@@ -84,6 +85,53 @@ export async function uploadCompanyLogo(formData: FormData) {
   } catch (err: any) {
     console.error("uploadCompanyLogo exception:", err);
     return { success: false, error: err?.message || "Gagal mengunggah logo" };
+  }
+}
+
+/**
+ * Delete company logo from Supabase Storage and clear institution_settings
+ */
+export async function deleteCompanyLogo() {
+  try {
+    const admin = createAdminClient();
+
+    const { data: existing } = await (admin as any)
+      .from("institution_settings")
+      .select("id, logo_url")
+      .limit(1)
+      .maybeSingle();
+
+    if (existing?.logo_url) {
+      try {
+        const parts = existing.logo_url.split("/");
+        const fileName = parts[parts.length - 1];
+        if (fileName) {
+          await admin.storage.from(BUCKET_COMPANY_LOGOS).remove([fileName]);
+        }
+      } catch (storageErr) {
+        console.warn("Storage logo delete warning:", storageErr);
+      }
+    }
+
+    if (existing?.id) {
+      await (admin as any)
+        .from("institution_settings")
+        .update({
+          logo_url: null,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", existing.id);
+    }
+
+    revalidatePath("/", "layout");
+    revalidatePath("/dashboard", "layout");
+    revalidatePath("/dashboard/settings");
+    revalidatePath("/dashboard/settings/institution");
+
+    return { success: true };
+  } catch (err: any) {
+    console.error("deleteCompanyLogo error:", err);
+    return { success: false, error: err?.message || "Gagal menghapus logo perusahaan" };
   }
 }
 
@@ -140,19 +188,70 @@ export async function uploadUserAvatar(formData: FormData) {
 
     const publicUrl = urlData.publicUrl;
 
+    // Get live user metadata
+    const { data: liveUser } = await admin.auth.admin.getUserById(user.id);
+    const currentMeta = liveUser?.user?.user_metadata || user.user_metadata || {};
+
     // Update Supabase Auth user metadata
     await admin.auth.admin.updateUserById(user.id, {
       user_metadata: {
-        ...user.user_metadata,
+        ...currentMeta,
         avatar_url: publicUrl,
       },
     });
 
     revalidatePath("/", "layout");
+    revalidatePath("/dashboard", "layout");
     return { success: true, url: publicUrl };
   } catch (err: any) {
     console.error("uploadUserAvatar exception:", err);
     return { success: false, error: err?.message || "Gagal mengunggah foto profil" };
+  }
+}
+
+/**
+ * Delete user avatar and revert to initials
+ */
+export async function deleteUserAvatar() {
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return { success: false, error: "Sesi tidak ditemukan" };
+    }
+
+    const admin = createAdminClient();
+    const { data: liveUser } = await admin.auth.admin.getUserById(user.id);
+    const currentMeta = liveUser?.user?.user_metadata || user.user_metadata || {};
+
+    if (currentMeta.avatar_url) {
+      try {
+        const parts = currentMeta.avatar_url.split("/");
+        const fileName = parts[parts.length - 1];
+        if (fileName) {
+          await admin.storage.from(BUCKET_AVATARS).remove([fileName]);
+        }
+      } catch (e) {
+        console.warn("Storage avatar delete warning:", e);
+      }
+    }
+
+    await admin.auth.admin.updateUserById(user.id, {
+      user_metadata: {
+        ...currentMeta,
+        avatar_url: null,
+      },
+    });
+
+    revalidatePath("/", "layout");
+    revalidatePath("/dashboard", "layout");
+    return { success: true };
+  } catch (err: any) {
+    console.error("deleteUserAvatar error:", err);
+    return { success: false, error: err?.message || "Gagal menghapus foto profil" };
   }
 }
 
@@ -175,9 +274,13 @@ export async function updateCurrentUserProfile(input: {
 
     const admin = createAdminClient();
 
+    // Get live user metadata
+    const { data: liveUser } = await admin.auth.admin.getUserById(user.id);
+    const currentMeta = liveUser?.user?.user_metadata || user.user_metadata || {};
+
     // Update Auth user_metadata
     const metadataUpdate: Record<string, any> = {
-      ...user.user_metadata,
+      ...currentMeta,
       full_name: input.fullName,
     };
     if (input.avatarUrl !== undefined) {
@@ -198,6 +301,7 @@ export async function updateCurrentUserProfile(input: {
       .eq("id", user.id);
 
     revalidatePath("/", "layout");
+    revalidatePath("/dashboard", "layout");
     return { success: true };
   } catch (err: any) {
     console.error("updateCurrentUserProfile error:", err);

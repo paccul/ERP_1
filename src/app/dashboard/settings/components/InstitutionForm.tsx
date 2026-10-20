@@ -8,7 +8,7 @@ import {
   type InstitutionSettingsInput,
 } from "@/lib/validations/settings";
 import { updateInstitutionSettings } from "../actions";
-import { uploadCompanyLogo } from "../storage-actions";
+import { uploadCompanyLogo, deleteCompanyLogo } from "../storage-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,6 +36,7 @@ interface InstitutionFormProps {
 export function InstitutionForm({ initialData }: InstitutionFormProps) {
   const [isPending, setIsPending] = useState(false);
   const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const [isDeletingLogo, setIsDeletingLogo] = useState(false);
   const [logoPreview, setLogoPreview] = useState<string | null>(initialData.logo_url || null);
   const [logoError, setLogoError] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(
@@ -87,6 +88,30 @@ export function InstitutionForm({ initialData }: InstitutionFormProps) {
       setLogoError(err?.message || "Gagal mengunggah logo");
     } finally {
       setIsUploadingLogo(false);
+    }
+  };
+
+  // Handle Logo Deletion
+  const handleDeleteLogo = async () => {
+    setIsDeletingLogo(true);
+    setLogoError(null);
+    try {
+      const res = await deleteCompanyLogo();
+      if (res.success) {
+        setLogoPreview(null);
+        setValue("logo_url", null);
+        if (logoFileInputRef.current) logoFileInputRef.current.value = "";
+        setFeedback({
+          type: "success",
+          message: "Logo perusahaan berhasil dihapus dari sistem.",
+        });
+      } else {
+        setLogoError(res.error || "Gagal menghapus logo perusahaan");
+      }
+    } catch (err: any) {
+      setLogoError(err?.message || "Gagal menghapus logo perusahaan");
+    } finally {
+      setIsDeletingLogo(false);
     }
   };
 
@@ -186,25 +211,39 @@ export function InstitutionForm({ initialData }: InstitutionFormProps) {
                 type="button"
                 variant="outline"
                 size="sm"
-                disabled={isUploadingLogo}
+                disabled={isUploadingLogo || isDeletingLogo}
                 onClick={() => logoFileInputRef.current?.click()}
                 className="border-[#374151] bg-[#1f2937] text-white hover:bg-[#374151] text-xs h-9"
               >
-                <Upload className="h-3.5 w-3.5 mr-2 text-amber-400" />
-                {logoPreview ? "Ganti Logo Perusahaan" : "Unggah Logo BUJP"}
+                {isUploadingLogo ? (
+                  <>
+                    <Loader2 className="h-3.5 w-3.5 mr-2 animate-spin text-amber-400" />
+                    Mengunggah...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="h-3.5 w-3.5 mr-2 text-amber-400" />
+                    {logoPreview ? "Ganti Logo Perusahaan" : "Unggah Logo BUJP"}
+                  </>
+                )}
               </Button>
               {logoPreview && (
                 <Button
                   type="button"
                   variant="ghost"
                   size="sm"
-                  onClick={() => {
-                    setLogoPreview(null);
-                    setValue("logo_url", null);
-                  }}
+                  disabled={isUploadingLogo || isDeletingLogo}
+                  onClick={handleDeleteLogo}
                   className="text-xs text-red-400 hover:text-red-300 hover:bg-red-500/10 h-9"
                 >
-                  Hapus Logo
+                  {isDeletingLogo ? (
+                    <>
+                      <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
+                      Menghapus...
+                    </>
+                  ) : (
+                    "Hapus Logo"
+                  )}
                 </Button>
               )}
             </div>

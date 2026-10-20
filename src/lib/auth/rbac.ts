@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export type SystemModuleKey =
   | "security"
@@ -69,10 +70,10 @@ export async function getCurrentUserPermissions(): Promise<{
 }> {
   const supabase = await createClient();
   const {
-    data: { user },
+    data: { user: authUser },
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  if (!authUser) {
     return {
       userId: null,
       email: null,
@@ -81,6 +82,18 @@ export async function getCurrentUserPermissions(): Promise<{
       avatarUrl: null,
       permissions: {},
     };
+  }
+
+  // Fetch live user directly from Supabase Auth admin to bypass cached session cookie user_metadata
+  let user = authUser;
+  try {
+    const admin = createAdminClient();
+    const { data: adminUserData } = await admin.auth.admin.getUserById(authUser.id);
+    if (adminUserData?.user) {
+      user = adminUserData.user;
+    }
+  } catch (err) {
+    console.warn("Could not fetch fresh user via admin client:", err);
   }
 
   const userMetaRole = user.user_metadata?.role as string | undefined;

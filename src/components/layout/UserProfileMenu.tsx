@@ -14,7 +14,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { signOut } from "@/app/login/actions";
-import { uploadUserAvatar, updateCurrentUserProfile } from "@/app/dashboard/settings/storage-actions";
+import { uploadUserAvatar, updateCurrentUserProfile, deleteUserAvatar } from "@/app/dashboard/settings/storage-actions";
 import { Button } from "@/components/ui/button";
 
 interface UserProfileMenuProps {
@@ -40,6 +40,7 @@ export function UserProfileMenu({
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(initialAvatarUrl || null);
   const [isSaving, setIsSaving] = useState(false);
+  const [isDeletingAvatar, setIsDeletingAvatar] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -85,6 +86,32 @@ export function UserProfileMenu({
       setSelectedFile(file);
       setPreviewUrl(URL.createObjectURL(file));
       setErrorMessage(null);
+    }
+  };
+
+  // Handle Avatar Deletion
+  const handleDeleteAvatar = async () => {
+    setIsDeletingAvatar(true);
+    setErrorMessage(null);
+    try {
+      const res = await deleteUserAvatar();
+      if (res.success) {
+        setSelectedFile(null);
+        setPreviewUrl(null);
+        setCurrentAvatar(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        setSaveSuccess(true);
+        setTimeout(() => {
+          setSaveSuccess(false);
+          window.location.reload();
+        }, 500);
+      } else {
+        setErrorMessage(res.error || "Gagal menghapus foto profil");
+      }
+    } catch (err: any) {
+      setErrorMessage(err?.message || "Gagal menghapus foto profil");
+    } finally {
+      setIsDeletingAvatar(false);
     }
   };
 
@@ -322,15 +349,37 @@ export function UserProfileMenu({
                   className="hidden"
                 />
 
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="border-[#374151] bg-[#111827] text-xs text-[#d1d5db] hover:bg-[#1f2937] hover:text-white"
-                >
-                  Pilih Gambar (Maks 2MB)
-                </Button>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    disabled={isSaving || isDeletingAvatar}
+                    onClick={() => fileInputRef.current?.click()}
+                    className="border-[#374151] bg-[#111827] text-xs text-[#d1d5db] hover:bg-[#1f2937] hover:text-white"
+                  >
+                    Pilih Gambar (Maks 2MB)
+                  </Button>
+                  {(previewUrl || currentAvatar) && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      disabled={isSaving || isDeletingAvatar}
+                      onClick={handleDeleteAvatar}
+                      className="text-xs text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                    >
+                      {isDeletingAvatar ? (
+                        <>
+                          <Loader2 className="h-3.5 w-3.5 animate-spin mr-1" />
+                          Menghapus...
+                        </>
+                      ) : (
+                        "Hapus Foto"
+                      )}
+                    </Button>
+                  )}
+                </div>
               </div>
 
               {/* Full Name Input */}
