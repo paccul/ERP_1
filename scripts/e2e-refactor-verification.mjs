@@ -18,7 +18,7 @@ async function runTests() {
 
     console.log("2. Logging in as admin@garda.bujp.id...");
     await page.fill('input[type="email"]', "admin@garda.bujp.id");
-    await page.fill('input[type="password"]', "GardaAdmin2026!");
+    await page.fill('input[type="password"]', "Password123!");
     await page.click('button[type="submit"]');
 
     await page.waitForURL("**/dashboard**", { timeout: 15000 });
@@ -66,7 +66,7 @@ async function runTests() {
     const mobilePage = await mobileContext.newPage();
     await mobilePage.goto("http://localhost:3000/login", { waitUntil: "networkidle" });
     await mobilePage.fill('input[type="email"]', "admin@garda.bujp.id");
-    await mobilePage.fill('input[type="password"]', "GardaAdmin2026!");
+    await mobilePage.fill('input[type="password"]', "Password123!");
     await mobilePage.click('button[type="submit"]');
     await mobilePage.waitForURL("**/dashboard**");
 
@@ -123,7 +123,7 @@ async function runTests() {
     const rbacPage = await rbacContext.newPage();
     await rbacPage.goto("http://localhost:3000/login", { waitUntil: "networkidle" });
     await rbacPage.fill('input[type="email"]', "finance@garda.bujp.id");
-    await rbacPage.fill('input[type="password"]', "GardaFinance2026!");
+    await rbacPage.fill('input[type="password"]', "Password123!");
     await rbacPage.click('button[type="submit"]');
     await rbacPage.waitForURL("**/dashboard**");
     console.log("✓ Logged in as finance_admin");
