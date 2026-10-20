@@ -74,22 +74,27 @@ function parseTokensJson(data: TokensData): ParsedColor[] {
   function traverse(node: any, currentPath: string[] = []): void {
     if (!node || typeof node !== 'object') return;
 
-    if ('type' in node && 'value' in node) {
-      const token = node as TokenItem;
-      const tokenType = String(token.type).toLowerCase();
+    // Mendukung format Tokens Studio standar (type/value) maupun W3C DTCG ($type/$value)
+    const hasType = 'type' in node || '$type' in node;
+    const hasValue = 'value' in node || '$value' in node;
+
+    if (hasType && hasValue) {
+      const rawType = node.$type !== undefined ? node.$type : node.type;
+      const rawValue = node.$value !== undefined ? node.$value : node.value;
+      const tokenType = String(rawType || '').toLowerCase();
 
       if (tokenType === 'color') {
         const name = normalizeTokenName(currentPath);
         let light = '#000000';
         let dark = '#000000';
 
-        if (typeof token.value === 'object' && token.value !== null) {
-          const valObj = token.value as any;
+        if (typeof rawValue === 'object' && rawValue !== null) {
+          const valObj = rawValue as any;
           light = valObj.light || valObj['Light'] || valObj.default || '#000000';
           dark = valObj.dark || valObj['Dark'] || valObj['Dark (Default)'] || valObj.default || '#000000';
-        } else if (typeof token.value === 'string') {
-          light = token.value;
-          dark = token.value;
+        } else if (typeof rawValue === 'string') {
+          light = rawValue;
+          dark = rawValue;
         }
 
         colors.push({
