@@ -134,7 +134,7 @@ export default async function CheckpointsPage({ searchParams }: CheckpointsPageP
               />
             </div>
           ) : (
-            <div className="overflow-x-auto">
+            <div className="w-full overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow className="border-[#374151] hover:bg-transparent">

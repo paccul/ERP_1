@@ -187,12 +187,12 @@ export function AccountForm({ parentAccounts }: AccountFormProps) {
         </CardContent>
       </Card>
 
-      <div className="flex items-center justify-between pt-4 border-t border-[#374151]">
-        <Link href="/dashboard/accounting/coa">
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#374151]">
+        <Link href="/dashboard/accounting/coa" className="w-full sm:w-auto">
           <Button
             type="button"
             variant="outline"
-            className="border-[#374151] text-gray-300 hover:bg-[#1f2937]"
+            className="w-full sm:w-auto border-[#374151] text-gray-300 hover:bg-[#1f2937]"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Kembali ke Bagan Akun
@@ -202,7 +202,7 @@ export function AccountForm({ parentAccounts }: AccountFormProps) {
         <Button
           type="submit"
           disabled={submitting}
-          className="bg-[#f59e0b] hover:bg-[#d97706] text-black font-semibold"
+          className="w-full sm:w-auto bg-[#f59e0b] hover:bg-[#d97706] text-black font-semibold"
         >
           {submitting ? (
             <>

@@ -1,0 +1,341 @@
+{
+  "timestamp": "2026-10-20T12:17:54.738Z",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "totalRoutes": 41,
+  "cleanRoutes": 41,
+  "overflowRoutes": 0,
+  "totalOverflowElements": 0,
+  "results": [
+    {
+      "route": "/dashboard",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/personnel",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/personnel/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/recruitment",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/clients",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/clients/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/sites",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/sites/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/checkpoints",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/roster",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/roster/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/bko-requests",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/logistics",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/logistics/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/logistics/distribution",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/invoices",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/invoices/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/payroll",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/payroll/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/coa",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/coa/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/journals",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/journals/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/ledger",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/receivables",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/reports",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/reports/balanced-scorecard",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/reports/management-analysis",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/reports/balance-sheet",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/reports/income-statement",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/reports/cash-flow",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/accounting/reports/equity-changes",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/settings",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/settings/institution",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/settings/org-chart",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/settings/users",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/settings/users/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/settings/roles",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/settings/roles/new",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    },
+    {
+      "route": "/dashboard/settings/backup",
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "overflowPx": 0,
+      "hasOverflow": false,
+      "culprits": []
+    }
+  ]
+}

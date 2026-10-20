@@ -164,8 +164,8 @@ export default async function PayrollPage({ searchParams }: PageProps) {
 
       {/* Table Section */}
       <Card className="bg-[#111827] border-[#374151] text-[#f9fafb] overflow-hidden">
-        <div className="overflow-x-auto">
-          <Table>
+        <div className="w-full overflow-x-auto">
+          <Table className="w-full">
             <TableHeader className="bg-[#030712] border-b border-[#374151]">
               <TableRow className="border-b border-[#374151] hover:bg-transparent">
                 <TableHead className="text-xs uppercase font-semibold text-[#9ca3af]">Periode Penggajian</TableHead>

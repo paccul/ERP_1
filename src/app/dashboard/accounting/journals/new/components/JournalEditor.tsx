@@ -226,7 +226,7 @@ export function JournalEditor({ accounts }: JournalEditorProps) {
 
       {/* Lines Editor Card */}
       <Card className="bg-[#030712] border-[#374151]">
-        <CardHeader className="flex flex-row items-center justify-between pb-3">
+        <CardHeader className="flex flex-wrap items-center justify-between gap-3 pb-3">
           <div>
             <CardTitle className="text-base text-white">
               Baris Rekening Debit & Kredit
@@ -240,14 +240,14 @@ export function JournalEditor({ accounts }: JournalEditorProps) {
             size="sm"
             onClick={addLine}
             variant="outline"
-            className="border-[#374151] text-gray-300 hover:bg-[#111827]"
+            className="w-full sm:w-auto border-[#374151] text-gray-300 hover:bg-[#111827]"
           >
             <Plus className="h-4 w-4 mr-1.5" />
             Tambah Baris Rekening
           </Button>
         </CardHeader>
         <CardContent className="space-y-3">
-          <div className="overflow-x-auto">
+          <div className="w-full overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-[#374151] text-xs text-gray-400">
@@ -342,7 +342,7 @@ export function JournalEditor({ accounts }: JournalEditorProps) {
               )}
             </div>
 
-            <div className="flex items-center gap-6 font-mono text-sm">
+            <div className="flex flex-wrap items-center gap-4 font-mono text-sm">
               <div>
                 <span className="text-gray-400 text-xs mr-2">Total Debit:</span>
                 <span className="font-bold text-emerald-400">
@@ -361,12 +361,12 @@ export function JournalEditor({ accounts }: JournalEditorProps) {
       </Card>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-between pt-4 border-t border-[#374151]">
-        <Link href="/dashboard/accounting/journals">
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#374151]">
+        <Link href="/dashboard/accounting/journals" className="w-full sm:w-auto">
           <Button
             type="button"
             variant="outline"
-            className="border-[#374151] text-gray-300 hover:bg-[#1f2937]"
+            className="w-full sm:w-auto border-[#374151] text-gray-300 hover:bg-[#1f2937]"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Kembali ke Daftar Jurnal
@@ -376,7 +376,7 @@ export function JournalEditor({ accounts }: JournalEditorProps) {
         <Button
           type="submit"
           disabled={submitting || !isBalanced}
-          className="bg-[#f59e0b] hover:bg-[#d97706] text-black font-semibold disabled:opacity-50"
+          className="w-full sm:w-auto bg-[#f59e0b] hover:bg-[#d97706] text-black font-semibold disabled:opacity-50"
         >
           {submitting ? (
             <>

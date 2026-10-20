@@ -150,7 +150,7 @@ export function OrgChartClient({ initialUnits }: OrgChartClientProps) {
 
         <Button
           onClick={() => setModalOpen(true)}
-          className="bg-[#f59e0b] hover:bg-[#d97706] text-black font-semibold text-xs sm:text-sm h-10 px-4 rounded-xl shadow-md"
+          className="w-full sm:w-auto bg-[#f59e0b] hover:bg-[#d97706] text-black font-semibold text-xs sm:text-sm h-10 px-4 rounded-xl shadow-md"
         >
           <Plus className="h-4 w-4 mr-1.5" />
           Tambah Unit Organisasi

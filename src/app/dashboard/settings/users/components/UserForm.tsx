@@ -242,12 +242,12 @@ export function UserForm({ roles }: UserFormProps) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between pt-2">
-        <Link href="/dashboard/settings/users">
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+        <Link href="/dashboard/settings/users" className="w-full sm:w-auto">
           <Button
             type="button"
             variant="outline"
-            className="border-[#374151] text-gray-300 hover:bg-[#111827]"
+            className="w-full sm:w-auto border-[#374151] text-gray-300 hover:bg-[#111827]"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Kembali
@@ -257,7 +257,7 @@ export function UserForm({ roles }: UserFormProps) {
         <Button
           type="submit"
           disabled={isPending}
-          className="bg-[#f59e0b] hover:bg-[#d97706] text-black font-bold px-6 h-11 rounded-xl shadow-lg"
+          className="w-full sm:w-auto bg-[#f59e0b] hover:bg-[#d97706] text-black font-bold px-6 h-11 rounded-xl shadow-lg"
         >
           {isPending ? (
             <>

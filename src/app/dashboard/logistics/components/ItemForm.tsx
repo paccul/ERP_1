@@ -252,16 +252,16 @@ export function ItemForm({ initialData }: ItemFormProps) {
             {errors.notes && <p className="text-xs text-[#ef4444]">{errors.notes.message}</p>}
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#374151]">
-            <Link href="/dashboard/logistics">
-              <Button type="button" variant="outline" className="border-[#374151] hover:bg-[#1f2937]">
+          <div className="flex flex-wrap items-center justify-end gap-3 pt-4 border-t border-[#374151]">
+            <Link href="/dashboard/logistics" className="w-full sm:w-auto">
+              <Button type="button" variant="outline" className="w-full sm:w-auto border-[#374151] hover:bg-[#1f2937]">
                 Batal
               </Button>
             </Link>
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-[#f59e0b] text-[#000000] font-semibold hover:bg-[#d97706] min-w-[140px]"
+              className="w-full sm:w-auto bg-[#f59e0b] text-[#000000] font-semibold hover:bg-[#d97706] min-w-[140px]"
             >
               {isSubmitting ? (
                 <>

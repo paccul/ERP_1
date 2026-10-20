@@ -130,10 +130,10 @@ export default async function PersonnelPage({ searchParams }: PersonnelPageProps
         )}
 
         <div className="w-full overflow-x-auto">
-          <Table className="min-w-[800px]">
+          <Table className="w-full">
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[180px]">NIK & Nama Personil</TableHead>
+              <TableHead className="min-w-[140px]">NIK & Nama Personil</TableHead>
               <TableHead>Kontak</TableHead>
               <TableHead>Penempatan (Site)</TableHead>
               <TableHead>Kualifikasi Gada</TableHead>

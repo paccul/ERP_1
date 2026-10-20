@@ -87,7 +87,8 @@ export default async function ChartOfAccountsPage() {
                   </Badge>
                 </CardHeader>
                 <CardContent className="p-0">
-                  <Table>
+                  <div className="w-full overflow-x-auto">
+                    <Table className="w-full">
                     <TableHeader>
                       <TableRow className="border-[#374151] hover:bg-transparent">
                         <TableHead className="w-32 text-gray-300 font-mono">Kode Akun</TableHead>
@@ -173,6 +174,7 @@ export default async function ChartOfAccountsPage() {
                       ))}
                     </TableBody>
                   </Table>
+                  </div>
                 </CardContent>
               </Card>
             );

@@ -111,7 +111,7 @@ export default async function ManagementAnalysisPage() {
           <span className="text-xs text-[#9ca3af]">Periode: {result.period}</span>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="w-full overflow-x-auto">
           <table className="w-full text-xs sm:text-sm text-left border-collapse">
             <thead className="bg-[#1f2937] text-[#9ca3af] font-semibold text-[11px] uppercase tracking-wider border-b border-[#374151]">
               <tr>

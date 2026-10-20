@@ -27,7 +27,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen w-full items-center justify-center bg-black p-4">
       {/* Decorative background glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[25%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-b from-amber-500/10 to-transparent blur-3xl opacity-50" />
+        <div className="absolute -top-[25%] left-1/2 -translate-x-1/2 w-full max-w-[600px] aspect-square rounded-full bg-gradient-to-b from-amber-500/10 to-transparent blur-3xl opacity-50" />
       </div>
 
       <div className="relative w-full max-w-md">

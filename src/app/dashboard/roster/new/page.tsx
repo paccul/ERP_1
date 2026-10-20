@@ -38,9 +38,9 @@ export default async function NewRosterPage() {
           Silakan buka jendela plotting shift terintegrasi untuk memilih personel, pos jaga tujuan, shift, dan tanggal tugas.
         </p>
 
-        <div className="pt-2 flex justify-center gap-3">
-          <Link href="/dashboard/roster">
-            <Button variant="outline" className="border-[#374151] text-gray-300 hover:bg-[#111827]">
+        <div className="pt-2 flex flex-wrap justify-center gap-3">
+          <Link href="/dashboard/roster" className="w-full sm:w-auto">
+            <Button variant="outline" className="w-full sm:w-auto border-[#374151] text-gray-300 hover:bg-[#111827]">
               Lihat Kalender Roster
             </Button>
           </Link>

@@ -238,8 +238,8 @@ export default async function RosterPage({ searchParams }: RosterPageProps) {
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <Table>
+            <div className="w-full overflow-x-auto">
+              <Table className="w-full">
                 <TableHeader>
                   <TableRow className="border-[#374151] hover:bg-transparent">
                     <TableHead className="text-gray-300">Tanggal Dinas</TableHead>

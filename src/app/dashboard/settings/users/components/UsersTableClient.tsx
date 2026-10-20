@@ -169,7 +169,7 @@ export function UsersTableClient({ initialUsers }: UsersTableClientProps) {
       {/* Users Table with Responsive Scroll Container */}
       <div className="border border-[#374151] rounded-2xl overflow-hidden bg-[#111827] shadow-sm">
         <div className="w-full overflow-x-auto">
-          <Table className="min-w-[700px]">
+          <Table className="w-full">
             <TableHeader className="bg-[#030712] border-b border-[#374151]">
               <TableRow className="border-[#374151] hover:bg-transparent">
                 <TableHead className="text-xs font-bold text-[#9ca3af] uppercase tracking-wider py-3.5">

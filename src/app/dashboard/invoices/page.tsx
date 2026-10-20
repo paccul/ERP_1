@@ -150,7 +150,7 @@ export default async function InvoicesPage({ searchParams }: PageProps) {
       <Card className="bg-[#111827] border-[#374151]">
         <CardContent className="p-4 space-y-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-1 overflow-x-auto pb-1">
+            <div className="flex flex-wrap items-center gap-1.5 pb-1 w-full max-w-full">
               <Link
                 href={`/dashboard/invoices?search=${currentSearch}`}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-colors ${
@@ -177,9 +177,9 @@ export default async function InvoicesPage({ searchParams }: PageProps) {
             </div>
 
             {/* Search */}
-            <form method="GET" action="/dashboard/invoices" className="flex items-center gap-2">
+            <form method="GET" action="/dashboard/invoices" className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               <input type="hidden" name="status" value={currentStatus} />
-              <div className="relative flex-1 min-w-[240px]">
+              <div className="relative flex-1 min-w-[200px]">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9ca3af]" />
                 <Input
                   name="search"

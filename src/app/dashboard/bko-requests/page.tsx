@@ -118,7 +118,7 @@ export default async function BkoRequestsPage({ searchParams }: BkoPageProps) {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {[
           { label: "Semua Permohonan", val: "all" },
           { label: "Menunggu (Pending)", val: "pending" },
@@ -157,8 +157,8 @@ export default async function BkoRequestsPage({ searchParams }: BkoPageProps) {
               />
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <Table>
+            <div className="w-full overflow-x-auto">
+              <Table className="w-full">
                 <TableHeader>
                   <TableRow className="border-[#374151] hover:bg-transparent">
                     <TableHead className="text-gray-300">Personel Satpam</TableHead>

@@ -196,8 +196,8 @@ export default async function GeneralLedgerPage({ searchParams }: LedgerPageProp
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <Table>
+            <div className="w-full overflow-x-auto">
+              <Table className="w-full">
                 <TableHeader>
                   <TableRow className="border-[#374151] hover:bg-transparent">
                     <TableHead className="w-28 text-gray-300 font-mono">Tanggal</TableHead>

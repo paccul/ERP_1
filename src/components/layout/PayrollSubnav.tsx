@@ -24,7 +24,7 @@ export function PayrollSubnav() {
   ];
 
   return (
-    <div className="flex items-center gap-2 border-b border-[#374151] pb-3 mb-6 overflow-x-auto">
+    <div className="flex flex-wrap items-center gap-2 border-b border-[#374151] pb-3 mb-6 w-full max-w-full">
       {navItems.map((item) => {
         const Icon = item.icon;
         return (

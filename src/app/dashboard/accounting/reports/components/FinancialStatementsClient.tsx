@@ -31,8 +31,8 @@ export function FinancialStatementsClient({ data }: { data: FinancialStatementsR
   return (
     <div className="space-y-6">
       {/* Tab Switcher & Print Control */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-b border-[#374151] pb-4">
-        <div className="flex items-center gap-2 overflow-x-auto">
+      <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-4 border-b border-[#374151] pb-4">
+        <div className="flex flex-wrap items-center gap-2 w-full max-w-full">
           <button
             type="button"
             onClick={() => setActiveTab("balance-sheet")}
@@ -491,20 +491,20 @@ export function FinancialStatementsClient({ data }: { data: FinancialStatementsR
         )}
 
         {/* Footer & Signature Box */}
-        <div className="border-t border-[#374151] pt-8 grid grid-cols-2 gap-8 text-center text-xs text-[#9ca3af]">
+        <div className="border-t border-[#374151] pt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 text-center text-xs text-[#9ca3af]">
           <div>
             <p>Disusun oleh,</p>
             <div className="h-16 flex items-end justify-center font-bold text-[#f9fafb]">
               Staf Akuntansi & Pajak BUJP
             </div>
-            <p className="border-t border-[#374151] pt-1 w-48 mx-auto font-medium">Bagian Keuangan</p>
+            <p className="border-t border-[#374151] pt-1 w-full max-w-[192px] mx-auto font-medium">Bagian Keuangan</p>
           </div>
           <div>
             <p>Disetujui oleh,</p>
             <div className="h-16 flex items-end justify-center font-bold text-[#f9fafb]">
               Direktur Utama BUJP
             </div>
-            <p className="border-t border-[#374151] pt-1 w-48 mx-auto font-medium">Manajemen Operasional</p>
+            <p className="border-t border-[#374151] pt-1 w-full max-w-[192px] mx-auto font-medium">Manajemen Operasional</p>
           </div>
         </div>
       </div>

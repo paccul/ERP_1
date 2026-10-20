@@ -51,7 +51,7 @@ export function PersonnelFilter({ sites }: PersonnelFilterProps) {
       </div>
 
       {/* Select Filters */}
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
         {/* Status Filter */}
         <select
           id="personnel-status-filter"
@@ -59,7 +59,7 @@ export function PersonnelFilter({ sites }: PersonnelFilterProps) {
           value={currentStatus}
           onChange={(e) => updateParam("status", e.target.value)}
           aria-label="Filter Status Personil"
-          className="h-9 rounded-lg border border-[#374151] bg-[#111827] px-3 py-1 text-xs text-white focus:border-[#f59e0b] focus:outline-none focus:ring-1 focus:ring-[#f59e0b]"
+          className="h-9 w-full sm:w-auto max-w-full rounded-lg border border-[#374151] bg-[#111827] px-3 py-1 text-xs text-white focus:border-[#f59e0b] focus:outline-none focus:ring-1 focus:ring-[#f59e0b]"
         >
           <option value="all">Semua Status</option>
           <option value="active">Aktif</option>
@@ -74,7 +74,7 @@ export function PersonnelFilter({ sites }: PersonnelFilterProps) {
           value={currentSite}
           onChange={(e) => updateParam("siteId", e.target.value)}
           aria-label="Filter Pos Jaga (Site)"
-          className="h-9 rounded-lg border border-[#374151] bg-[#111827] px-3 py-1 text-xs text-white focus:border-[#f59e0b] focus:outline-none focus:ring-1 focus:ring-[#f59e0b]"
+          className="h-9 w-full sm:w-auto max-w-full rounded-lg border border-[#374151] bg-[#111827] px-3 py-1 text-xs text-white focus:border-[#f59e0b] focus:outline-none focus:ring-1 focus:ring-[#f59e0b] truncate"
         >
           <option value="all">Semua Pos Jaga</option>
           {sites.map((site) => (

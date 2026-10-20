@@ -157,7 +157,7 @@ export function PersonnelForm({ initialData, sites }: PersonnelFormProps) {
       )}
 
       {/* Tab Navigation */}
-      <div className="flex border-b border-[#374151] overflow-x-auto gap-2 pb-2">
+      <div className="flex flex-wrap border-b border-[#374151] gap-2 pb-2 w-full">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -565,8 +565,8 @@ export function PersonnelForm({ initialData, sites }: PersonnelFormProps) {
           </Card>
 
           {/* Bottom Action Buttons */}
-          <div className="flex items-center justify-between border-t border-[#374151] pt-5">
-            <div className="flex gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#374151] pt-5">
+            <div className="flex flex-wrap gap-2">
               {activeTab !== "biodata" && (
                 <Button
                   type="button"

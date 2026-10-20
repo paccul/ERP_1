@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "sync:tokens": "npx tsx scripts/parse-tokens.ts"
+    "sync:tokens": "npx tsx scripts/parse-tokens.ts",
+    "check:mobile": "npx tsx scripts/check-mobile.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

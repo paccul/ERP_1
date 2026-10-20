@@ -153,7 +153,7 @@ export default async function RecruitmentPage({ searchParams }: RecruitmentPageP
             </Button>
           </form>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto pt-2 border-t border-[#374151]">
+          <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-[#374151] w-full max-w-full">
             {[
               { label: "Semua", val: "all" },
               { label: "1. Berkas Baru", val: "new" },

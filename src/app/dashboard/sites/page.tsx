@@ -199,8 +199,8 @@ export default async function SitesPage({ searchParams }: SitesPageProps) {
               </Link>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <Table>
+            <div className="w-full overflow-x-auto">
+              <Table className="w-full">
                 <TableHeader>
                   <TableRow className="border-[#374151] hover:bg-transparent">
                     <TableHead className="text-gray-300">Kode & Nama Pos Jaga</TableHead>

@@ -187,8 +187,8 @@ export default async function JournalsPage({ searchParams }: JournalsPageProps) 
               </Link>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <Table>
+            <div className="w-full overflow-x-auto">
+              <Table className="w-full">
                 <TableHeader>
                   <TableRow className="border-[#374151] hover:bg-transparent">
                     <TableHead className="w-32 text-gray-300">No. Voucher</TableHead>

@@ -416,9 +416,9 @@ export function InvoiceForm({ clients }: InvoiceFormProps) {
           </div>
 
           {/* Form Actions */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#374151]">
-            <Link href="/dashboard/invoices">
-              <Button type="button" variant="outline" className="border-[#374151] hover:bg-[#1f2937]">
+          <div className="flex flex-wrap items-center justify-end gap-3 pt-4 border-t border-[#374151]">
+            <Link href="/dashboard/invoices" className="w-full sm:w-auto">
+              <Button type="button" variant="outline" className="w-full sm:w-auto border-[#374151] hover:bg-[#1f2937]">
                 Batal
               </Button>
             </Link>
@@ -426,7 +426,7 @@ export function InvoiceForm({ clients }: InvoiceFormProps) {
               type="button"
               disabled={isSubmitting || fields.length === 0}
               onClick={() => submitWithAutoPost(false)}
-              className="bg-[#1f2937] text-[#f9fafb] border border-[#374151] hover:bg-[#374151]"
+              className="w-full sm:w-auto bg-[#1f2937] text-[#f9fafb] border border-[#374151] hover:bg-[#374151]"
             >
               <Save className="h-4 w-4 mr-2" />
               Simpan Sebagai Draf
@@ -435,7 +435,7 @@ export function InvoiceForm({ clients }: InvoiceFormProps) {
               type="button"
               disabled={isSubmitting || fields.length === 0}
               onClick={() => submitWithAutoPost(true)}
-              className="bg-[#f59e0b] text-[#000000] font-semibold hover:bg-[#d97706] min-w-[200px]"
+              className="w-full sm:w-auto bg-[#f59e0b] text-[#000000] font-semibold hover:bg-[#d97706] min-w-[200px]"
             >
               {isSubmitting ? (
                 <>

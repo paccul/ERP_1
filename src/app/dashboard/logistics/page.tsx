@@ -68,15 +68,15 @@ export default async function LogisticsPage({ searchParams }: PageProps) {
             Manajemen inventaris seragam PDH/PDL, perlengkapan taktis, atribut, dan senjata terintegrasi jurnal akuntansi.
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Link href="/dashboard/logistics/distribution">
-            <Button className="bg-[#1f2937] text-[#f9fafb] border border-[#374151] hover:bg-[#374151]">
+        <div className="flex flex-wrap items-center gap-2">
+          <Link href="/dashboard/logistics/distribution" className="w-full sm:w-auto">
+            <Button className="w-full sm:w-auto bg-[#1f2937] text-[#f9fafb] border border-[#374151] hover:bg-[#374151]">
               <Send className="h-4 w-4 mr-2 text-[#f59e0b]" />
               Distribusi Kaporlap
             </Button>
           </Link>
-          <Link href="/dashboard/logistics/new">
-            <Button className="bg-[#f59e0b] text-[#000000] font-semibold hover:bg-[#d97706]">
+          <Link href="/dashboard/logistics/new" className="w-full sm:w-auto">
+            <Button className="w-full sm:w-auto bg-[#f59e0b] text-[#000000] font-semibold hover:bg-[#d97706]">
               <PlusCircle className="h-4 w-4 mr-2" />
               Tambah Master Item
             </Button>
@@ -143,7 +143,7 @@ export default async function LogisticsPage({ searchParams }: PageProps) {
         <CardContent className="p-4 space-y-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Category tabs */}
-            <div className="flex items-center gap-1 overflow-x-auto pb-1">
+            <div className="flex flex-wrap items-center gap-1.5 pb-1 w-full max-w-full">
               <Link
                 href={`/dashboard/logistics?search=${currentSearch}&lowStock=${isLowStockOnly}`}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-colors ${
@@ -205,8 +205,8 @@ export default async function LogisticsPage({ searchParams }: PageProps) {
 
       {/* Table Section */}
       <Card className="bg-[#111827] border-[#374151] text-[#f9fafb] overflow-hidden">
-        <div className="overflow-x-auto">
-          <Table>
+        <div className="w-full overflow-x-auto">
+          <Table className="w-full">
             <TableHeader className="bg-[#030712] border-b border-[#374151]">
               <TableRow className="border-b border-[#374151] hover:bg-transparent">
                 <TableHead className="text-xs uppercase font-semibold text-[#9ca3af]">Kode SKU</TableHead>
