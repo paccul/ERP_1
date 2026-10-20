@@ -3,6 +3,8 @@ import { SettingsSubnav } from "@/components/layout/SettingsSubnav";
 import { getInstitutionSettings } from "../actions";
 import { createClient } from "@/lib/supabase/server";
 import { BackupClient } from "./components/BackupClient";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const metadata: Metadata = {
   title: "Pajak, Sistem & Backup Data | Garda ERP",
@@ -10,6 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default async function BackupPage() {
+  const { allowed } = await requirePermission("institution", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Pajak, Sistem & Backup Data" />;
+  }
+
   const supabase = await createClient();
 
   const [

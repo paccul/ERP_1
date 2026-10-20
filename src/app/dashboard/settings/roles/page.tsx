@@ -10,6 +10,8 @@ import {
   Edit,
   Lock,
 } from "lucide-react";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const metadata: Metadata = {
   title: "Role & Matriks Izin (RBAC) | Garda ERP",
@@ -17,6 +19,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RolesPage() {
+  const { allowed } = await requirePermission("users", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Role & Matriks Hak Akses (RBAC)" />;
+  }
+
   const roles = await getRoles();
 
   return (

@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { SettingsSubnav } from "@/components/layout/SettingsSubnav";
 import { getUsers } from "../actions";
 import { UsersTableClient } from "./components/UsersTableClient";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const metadata: Metadata = {
   title: "Manajemen Pengguna Sistem | Garda ERP",
@@ -9,6 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default async function UsersPage() {
+  const { allowed } = await requirePermission("users", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Manajemen Akun Pengguna" />;
+  }
+
   const users = await getUsers();
 
   return (

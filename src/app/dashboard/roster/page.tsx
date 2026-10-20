@@ -32,6 +32,8 @@ import {
 } from "@/components/ui/card";
 import { ShiftPlotModal } from "./components/ShiftPlotModal";
 import { DeleteAssignmentButton } from "./components/DeleteAssignmentButton";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const dynamic = "force-dynamic";
 
@@ -44,6 +46,11 @@ interface RosterPageProps {
 }
 
 export default async function RosterPage({ searchParams }: RosterPageProps) {
+  const { allowed } = await requirePermission("security", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Jadwal Jaga & Plotting Roster" />;
+  }
+
   const params = await searchParams;
 
   // Defaults: 7 days window starting from 3 days ago

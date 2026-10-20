@@ -35,6 +35,8 @@ import {
 import { NewApplicantModal } from "./components/NewApplicantModal";
 import { UpdateStatusModal } from "./components/UpdateStatusModal";
 import { ConvertApplicantModal } from "./components/ConvertApplicantModal";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +48,11 @@ interface RecruitmentPageProps {
 }
 
 export default async function RecruitmentPage({ searchParams }: RecruitmentPageProps) {
+  const { allowed } = await requirePermission("recruitment", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Rekrutmen Calon Satpam (PSB)" />;
+  }
+
   const params = await searchParams;
   const status = params.status || "all";
   const search = params.search || "";

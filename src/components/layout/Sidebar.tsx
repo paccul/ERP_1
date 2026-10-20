@@ -17,12 +17,14 @@ import {
   UserPlus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { UserPermissionMap } from "@/lib/auth/rbac";
 
-interface NavModule {
+export interface NavModule {
   name: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   description: string;
+  moduleKey?: string;
 }
 
 export const bujpModules: NavModule[] = [
@@ -31,72 +33,105 @@ export const bujpModules: NavModule[] = [
     href: "/dashboard",
     icon: LayoutDashboard,
     description: "Ringkasan Operasional & KPI",
+    moduleKey: undefined, // Always visible
   },
   {
     name: "Personel Satpam",
     href: "/dashboard/personnel",
     icon: Users,
     description: "Data Anggota, KTA & Gada",
+    moduleKey: "security",
   },
   {
     name: "Rekrutmen PSB",
     href: "/dashboard/recruitment",
     icon: UserPlus,
     description: "Kandidat Satpam & Samapta",
+    moduleKey: "recruitment",
   },
   {
     name: "Klien & Pos Jaga",
     href: "/dashboard/clients",
     icon: Building2,
     description: "Mitra & Lokasi Pengamanan",
+    moduleKey: "security",
   },
   {
     name: "Jadwal Jaga / Roster",
     href: "/dashboard/roster",
     icon: CalendarDays,
     description: "Plotting Shift & BKO",
+    moduleKey: "security",
   },
   {
     name: "Logistik & Perlengkapan",
     href: "/dashboard/logistics",
     icon: Boxes,
     description: "Kaporlap, Seragam & Stok",
+    moduleKey: "logistics",
   },
   {
     name: "Invoicing & Billing",
     href: "/dashboard/invoices",
     icon: Receipt,
     description: "Tagihan Jasa Manpower",
+    moduleKey: "finance",
   },
   {
     name: "Penggajian (Payroll)",
     href: "/dashboard/payroll",
     icon: Wallet,
     description: "Slip Gaji, Lembur & BPJS",
+    moduleKey: "finance",
   },
   {
     name: "Jurnal Akuntansi",
     href: "/dashboard/accounting",
     icon: BookOpen,
     description: "Buku Besar & Double-Entry",
+    moduleKey: "accounting",
   },
   {
     name: "Pengaturan Sistem",
     href: "/dashboard/settings",
     icon: Settings,
     description: "Legalitas, Role & Organisasi",
+    moduleKey: "institution",
   },
 ];
 
 interface SidebarProps {
   mobileOpen?: boolean;
   onClose?: () => void;
+  companyLogoUrl?: string | null;
+  userRole?: string | null;
+  permissions?: UserPermissionMap | null;
 }
 
-export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
+export function Sidebar({
+  mobileOpen = false,
+  onClose,
+  companyLogoUrl,
+  userRole,
+  permissions,
+}: SidebarProps) {
   const pathname = usePathname();
 
-  const navContent = (
+  const isSuperAdmin =
+    userRole?.toLowerCase() === "super_admin" ||
+    userRole?.toLowerCase() === "administrator sistem" ||
+    userRole?.toLowerCase() === "administrator bujp" ||
+    !userRole; // Fallback default to admin
+
+  // Filter modules based on user's can_view permissions
+  const visibleModules = bujpModules.filter((item) => {
+    if (!item.moduleKey || isSuperAdmin) return true;
+    if (!permissions) return true;
+    const perm = permissions[item.moduleKey];
+    return perm ? Boolean(perm.can_view) : false;
+  });
+
+  const renderNavContent = (isMobile = false) => (
     <div className="flex h-full flex-col bg-[#030712] text-white">
       {/* Brand Header */}
       <div className="flex h-16 shrink-0 items-center justify-between border-b border-[#374151] px-5">
@@ -105,9 +140,17 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
           className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59e0b] rounded-2xl"
           onClick={onClose}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-400 text-black shadow-lg shadow-amber-500/25">
-            <Shield className="h-5 w-5" />
-          </div>
+          {companyLogoUrl ? (
+            <img
+              src={companyLogoUrl}
+              alt="Logo BUJP"
+              className="h-10 w-10 rounded-2xl object-contain bg-[#111827] p-1 border border-[#374151] shadow-lg shadow-black/40"
+            />
+          ) : (
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-400 text-black shadow-lg shadow-amber-500/25">
+              <Shield className="h-5 w-5" />
+            </div>
+          )}
           <div>
             <div className="text-sm font-black tracking-wide text-white">
               GARDA BUJP
@@ -117,12 +160,12 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
             </div>
           </div>
         </Link>
-        {onClose && (
+        {isMobile && onClose && (
           <button
             type="button"
             onClick={onClose}
             aria-label="Tutup Menu Navigasi"
-            className="rounded-lg p-1.5 text-[#9ca3af] hover:bg-[#111827] hover:text-white focus-visible:ring-2 focus-visible:ring-[#f59e0b] lg:hidden"
+            className="rounded-lg p-1.5 text-[#9ca3af] hover:bg-[#111827] hover:text-white focus-visible:ring-2 focus-visible:ring-[#f59e0b]"
           >
             <X className="h-5 w-5" />
           </button>
@@ -140,7 +183,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
         aria-label="Navigasi Utama BUJP"
         className="flex-1 space-y-1.5 overflow-y-auto px-3 py-1"
       >
-        {bujpModules.map((item) => {
+        {visibleModules.map((item) => {
           const isActive =
             item.href === "/dashboard"
               ? pathname === "/dashboard"
@@ -198,7 +241,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
         })}
       </nav>
 
-      {/* Footer System Status */}
+      {/* Footer System Info */}
       <div className="shrink-0 border-t border-[#374151] p-3">
         <div className="rounded-2xl border border-[#374151]/80 bg-[#111827] p-3 text-[11px] text-[#9ca3af] shadow-sm">
           <div className="flex items-center justify-between font-medium">
@@ -208,7 +251,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
             </span>
           </div>
           <p className="mt-1 text-[10px] text-[#6b7280]">
-            Database Terenkripsi & RLS Aktif
+            Sistem Manajemen BUJP Terpadu
           </p>
         </div>
       </div>
@@ -219,7 +262,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
     <>
       {/* Desktop Permanent Sidebar */}
       <aside className="hidden w-64 shrink-0 border-r border-[#374151] bg-[#030712] lg:flex lg:flex-col lg:sticky lg:top-0 lg:h-screen lg:self-start lg:z-30">
-        {navContent}
+        {renderNavContent(false)}
       </aside>
 
       {/* Mobile Slide-Over Drawer */}
@@ -232,9 +275,12 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
             aria-hidden="true"
           />
 
-          {/* Drawer Panel */}
-          <div className="relative flex w-72 max-w-xs flex-1 flex-col shadow-2xl">
-            {navContent}
+          {/* Drawer content */}
+          <div
+            data-testid="mobile-sidebar-drawer"
+            className="relative flex w-full max-w-xs flex-1 flex-col bg-[#030712] shadow-2xl transition-transform duration-300 ease-in-out z-10"
+          >
+            {renderNavContent(true)}
           </div>
         </div>
       )}

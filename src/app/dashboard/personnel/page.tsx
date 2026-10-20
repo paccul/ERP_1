@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const dynamic = "force-dynamic";
 
@@ -35,6 +37,11 @@ interface PersonnelPageProps {
 }
 
 export default async function PersonnelPage({ searchParams }: PersonnelPageProps) {
+  const { allowed } = await requirePermission("security", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Data Personel Satpam" />;
+  }
+
   const params = await searchParams;
   const [{ data: personnelList, error }, sites] = await Promise.all([
     getPersonnel({
@@ -122,7 +129,8 @@ export default async function PersonnelPage({ searchParams }: PersonnelPageProps
           </div>
         )}
 
-        <Table>
+        <div className="w-full overflow-x-auto">
+          <Table className="min-w-[800px]">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[180px]">NIK & Nama Personil</TableHead>
@@ -306,6 +314,7 @@ export default async function PersonnelPage({ searchParams }: PersonnelPageProps
             )}
           </TableBody>
         </Table>
+        </div>
       </div>
     </div>
   );

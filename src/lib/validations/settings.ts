@@ -35,6 +35,7 @@ export const userProfileSchema = z.object({
   role_id: z.string().min(1, "Role penugasan wajib dipilih"),
   is_active: z.boolean().default(true),
   password: z.string().min(6, "Password minimal 6 karakter").optional().or(z.literal("")),
+  avatar_url: z.string().nullable().optional(),
 });
 
 export type UserProfileInput = z.infer<typeof userProfileSchema>;

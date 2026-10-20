@@ -239,6 +239,14 @@ export async function createUser(input: UserProfileInput) {
   const data = parsed.data;
   const admin = createAdminClient();
 
+  // Find role name
+  const { data: roleRow } = await (admin as any)
+    .from("roles")
+    .select("name")
+    .eq("id", data.role_id)
+    .maybeSingle();
+  const roleName = roleRow?.name || "Staf Operasional";
+
   // Create auth user
   const password = data.password || "Password123!";
   const { data: authData, error: authError } = await admin.auth.admin.createUser({
@@ -248,6 +256,8 @@ export async function createUser(input: UserProfileInput) {
     user_metadata: {
       full_name: data.full_name,
       role_id: data.role_id,
+      role: roleName,
+      avatar_url: data.avatar_url || null,
     },
   });
 
@@ -269,6 +279,24 @@ export async function createUser(input: UserProfileInput) {
     return { success: false, error: profileError.message };
   }
 
+  revalidatePath("/dashboard/settings/users");
+  return { success: true };
+}
+
+export async function resetUserPassword(userId: string, newPassword: string) {
+  const admin = createAdminClient();
+  const { error } = await admin.auth.admin.updateUserById(userId, { password: newPassword });
+  if (error) return { success: false, error: error.message };
+  return { success: true };
+}
+
+export async function deleteUser(userId: string) {
+  const admin = createAdminClient();
+  await (admin as any).from("profiles").delete().eq("id", userId);
+  const { error } = await admin.auth.admin.deleteUser(userId);
+  if (error) {
+    console.error("Auth delete error:", error);
+  }
   revalidatePath("/dashboard/settings/users");
   return { success: true };
 }
@@ -462,6 +490,7 @@ export async function saveRole(input: RoleInput) {
     }
   }
 
+  revalidatePath("/", "layout");
   revalidatePath("/dashboard/settings/roles");
   return { success: true, roleId };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -8,6 +8,7 @@ import {
   type InstitutionSettingsInput,
 } from "@/lib/validations/settings";
 import { updateInstitutionSettings } from "../actions";
+import { uploadCompanyLogo } from "../storage-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,6 +25,8 @@ import {
   CheckCircle2,
   AlertCircle,
   Shield,
+  Upload,
+  Image as ImageIcon,
 } from "lucide-react";
 
 interface InstitutionFormProps {
@@ -32,24 +35,69 @@ interface InstitutionFormProps {
 
 export function InstitutionForm({ initialData }: InstitutionFormProps) {
   const [isPending, setIsPending] = useState(false);
+  const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const [logoPreview, setLogoPreview] = useState<string | null>(initialData.logo_url || null);
+  const [logoError, setLogoError] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(
     null
   );
 
+  const logoFileInputRef = useRef<HTMLInputElement>(null);
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<InstitutionSettingsInput>({
     resolver: zodResolver(institutionSettingsSchema),
     defaultValues: initialData,
   });
 
+  // Handle Logo Upload
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      setLogoError("Ukuran logo maksimal 2MB");
+      return;
+    }
+
+    setLogoError(null);
+    setIsUploadingLogo(true);
+    setLogoPreview(URL.createObjectURL(file));
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await uploadCompanyLogo(formData);
+
+      if (res.success && res.url) {
+        setValue("logo_url", res.url);
+        setLogoPreview(res.url);
+        setFeedback({
+          type: "success",
+          message: "Logo perusahaan berhasil diunggah dan disimpan ke database.",
+        });
+      } else {
+        setLogoError(res.error || "Gagal mengunggah logo");
+      }
+    } catch (err: any) {
+      setLogoError(err?.message || "Gagal mengunggah logo");
+    } finally {
+      setIsUploadingLogo(false);
+    }
+  };
+
   const onSubmit = async (values: InstitutionSettingsInput) => {
     setIsPending(true);
     setFeedback(null);
     try {
-      const res = await updateInstitutionSettings(values);
+      const res = await updateInstitutionSettings({
+        ...values,
+        logo_url: logoPreview,
+      });
       if (res.success) {
         setFeedback({
           type: "success",
@@ -89,6 +137,84 @@ export function InstitutionForm({ initialData }: InstitutionFormProps) {
           <span>{feedback.message}</span>
         </div>
       )}
+
+      {/* Section 0: Upload Logo Perusahaan (Supabase Storage) */}
+      <div className="bg-[#111827] border border-[#374151] rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
+        <div className="flex items-center gap-3 border-b border-[#1f2937] pb-4">
+          <div className="p-2.5 bg-amber-500/15 text-amber-400 rounded-xl">
+            <ImageIcon className="h-5 w-5" />
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-white">Logo Resmi Perusahaan (BUJP)</h2>
+            <p className="text-xs text-[#9ca3af]">
+              Ditampilkan pada Header sistem, Sidebar, serta kop cetak Faktur Tagihan dan Slip Gaji.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center gap-6 pt-1">
+          <div className="relative flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border-2 border-dashed border-[#374151] bg-[#030712] p-2 overflow-hidden shadow-inner">
+            {logoPreview ? (
+              <img
+                src={logoPreview}
+                alt="Logo Perusahaan"
+                className="h-full w-full object-contain"
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center text-[#6b7280]">
+                <Shield className="h-8 w-8 text-[#9ca3af] mb-1" />
+                <span className="text-[10px]">Belum Ada</span>
+              </div>
+            )}
+            {isUploadingLogo && (
+              <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                <Loader2 className="h-6 w-6 animate-spin text-amber-400" />
+              </div>
+            )}
+          </div>
+
+          <div className="flex-1 space-y-2 text-center sm:text-left">
+            <input
+              ref={logoFileInputRef}
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/svg+xml"
+              onChange={handleLogoUpload}
+              className="hidden"
+            />
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={isUploadingLogo}
+                onClick={() => logoFileInputRef.current?.click()}
+                className="border-[#374151] bg-[#1f2937] text-white hover:bg-[#374151] text-xs h-9"
+              >
+                <Upload className="h-3.5 w-3.5 mr-2 text-amber-400" />
+                {logoPreview ? "Ganti Logo Perusahaan" : "Unggah Logo BUJP"}
+              </Button>
+              {logoPreview && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setLogoPreview(null);
+                    setValue("logo_url", null);
+                  }}
+                  className="text-xs text-red-400 hover:text-red-300 hover:bg-red-500/10 h-9"
+                >
+                  Hapus Logo
+                </Button>
+              )}
+            </div>
+            <p className="text-[11px] text-[#9ca3af]">
+              Format didukung: PNG, JPG, WebP, SVG. Maksimal ukuran 2MB (disimpan di Supabase Storage).
+            </p>
+            {logoError && <p className="text-xs text-red-400">{logoError}</p>}
+          </div>
+        </div>
+      </div>
 
       {/* Section 1: Identitas BUJP & Izin Mabes Polri */}
       <div className="bg-[#111827] border border-[#374151] rounded-2xl p-5 sm:p-6 shadow-sm space-y-5">

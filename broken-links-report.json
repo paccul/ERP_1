@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-20T08:00:51.515Z",
-  "baseUrl": "http://localhost:3000",
+  "timestamp": "2026-10-20T08:07:29.535Z",
+  "baseUrl": "https://erp-2-dun.vercel.app",
   "totalScanned": 99,
   "passedCount": 99,
   "failedCount": 0,

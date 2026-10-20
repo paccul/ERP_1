@@ -25,6 +25,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 interface PageProps {
   searchParams: Promise<{
@@ -35,6 +37,11 @@ interface PageProps {
 }
 
 export default async function LogisticsPage({ searchParams }: PageProps) {
+  const { allowed } = await requirePermission("logistics", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Logistik & Perlengkapan Satpam" />;
+  }
+
   const params = await searchParams;
   const currentCategory = params.category || "all";
   const currentSearch = params.search || "";

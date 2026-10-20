@@ -15,10 +15,17 @@ import { AccountingSubnav } from "@/components/layout/AccountingSubnav";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const dynamic = "force-dynamic";
 
 export default async function AccountingOverviewPage() {
+  const { allowed } = await requirePermission("accounting", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Jurnal Akuntansi & Buku Besar" />;
+  }
+
   const [{ data: accounts }, { data: journals }] = await Promise.all([
     getAccounts(),
     getJournalEntries(),

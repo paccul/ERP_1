@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { SettingsSubnav } from "@/components/layout/SettingsSubnav";
 import { getInstitutionSettings } from "../actions";
 import { InstitutionForm } from "../components/InstitutionForm";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const metadata: Metadata = {
   title: "Profil BUJP & Legalitas SIO Polri | Garda ERP",
@@ -9,6 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default async function InstitutionPage() {
+  const { allowed } = await requirePermission("institution", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Profil BUJP & Legalitas SIO Polri" />;
+  }
+
   const settings = await getInstitutionSettings();
 
   return (

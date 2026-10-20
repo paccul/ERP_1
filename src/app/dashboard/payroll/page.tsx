@@ -26,6 +26,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 interface PageProps {
   searchParams: Promise<{
@@ -34,6 +36,11 @@ interface PageProps {
 }
 
 export default async function PayrollPage({ searchParams }: PageProps) {
+  const { allowed } = await requirePermission("finance", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Penggajian (Payroll Satpam)" />;
+  }
+
   const params = await searchParams;
   const currentSearch = params.search || "";
 

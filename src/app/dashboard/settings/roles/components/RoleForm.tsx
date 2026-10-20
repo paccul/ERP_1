@@ -55,7 +55,13 @@ export function RoleForm({ initialRole }: RoleFormProps) {
     return map;
   });
 
+  const isSuperAdminRole =
+    initialRole?.name?.toLowerCase() === "super_admin" ||
+    initialRole?.name?.toLowerCase() === "administrator sistem";
+
   const togglePermission = (moduleKey: string, field: "can_view" | "can_manage") => {
+    if (isSuperAdminRole) return; // Super admin permissions are permanently locked to true
+
     setPermissions((prev) => {
       const current = prev[moduleKey] || { can_view: false, can_manage: false };
       const nextVal = !current[field];

@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { SettingsSubnav } from "@/components/layout/SettingsSubnav";
 import { getOrgUnits } from "../actions";
 import { OrgChartClient } from "./components/OrgChartClient";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const metadata: Metadata = {
   title: "Struktur Organisasi BUJP | Garda ERP",
@@ -9,6 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default async function OrgChartPage() {
+  const { allowed } = await requirePermission("institution", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Struktur Organisasi BUJP" />;
+  }
+
   const units = await getOrgUnits();
 
   return (

@@ -31,6 +31,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DeleteClientButton } from "./components/DeleteClientButton";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const dynamic = "force-dynamic";
 
@@ -42,6 +44,11 @@ interface ClientsPageProps {
 }
 
 export default async function ClientsPage({ searchParams }: ClientsPageProps) {
+  const { allowed } = await requirePermission("security", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Klien Mitra & Pos Jaga" />;
+  }
+
   const params = await searchParams;
   const search = params.search || "";
   const status = params.status || "all";

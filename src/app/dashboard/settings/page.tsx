@@ -4,6 +4,8 @@ import { SettingsSubnav } from "@/components/layout/SettingsSubnav";
 import { getInstitutionSettings } from "./actions";
 import { InstitutionForm } from "./components/InstitutionForm";
 import { Network, Users, KeyRound, ShieldCheck, ArrowRight } from "lucide-react";
+import { requirePermission } from "@/lib/auth/rbac";
+import { AccessDenied } from "@/components/layout/AccessDenied";
 
 export const metadata: Metadata = {
   title: "Pengaturan Sistem & Profil BUJP | Garda ERP",
@@ -11,6 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default async function SettingsPage() {
+  const { allowed } = await requirePermission("institution", "view");
+  if (!allowed) {
+    return <AccessDenied moduleName="Pengaturan Sistem & Profil BUJP" />;
+  }
+
   const settings = await getInstitutionSettings();
 
   const quickLinks = [
