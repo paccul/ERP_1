@@ -1,0 +1,43 @@
+name: Process Figma Design Tokens
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'tokens.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-tokens:
+    name: Sync Tokens Studio JSON to Website CSS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Parse Tokens JSON to CSS Custom Properties
+        run: npm run sync:tokens
+
+      - name: Auto-Commit & Push Updated globals.css
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(tokens): auto-sync globals.css from Figma tokens.json [skip ci]"
+          file_pattern: "src/app/globals.css"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
