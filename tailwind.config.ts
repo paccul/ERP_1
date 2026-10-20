@@ -54,6 +54,10 @@ const config: Config = {
         "status-warning": "var(--color-status-warning)",
         "status-danger": "var(--color-status-danger)",
       },
+      fontFamily: {
+        sans: ["var(--font-ui)", "Plus Jakarta Sans", "Inter", "sans-serif"],
+        mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
+      },
       borderRadius: {
         lg: "0.5rem",
         md: "calc(0.5rem - 2px)",

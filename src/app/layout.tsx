@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-ui",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Garda ERP — Sistem Manajemen BUJP Terintegrasi",
@@ -18,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-black text-white antialiased transition-colors duration-200`}>
+      <body className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} font-sans min-h-screen bg-black text-white antialiased transition-colors duration-200`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
