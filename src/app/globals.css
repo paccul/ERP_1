@@ -16,16 +16,16 @@
     --color-border-default: #CBD5E1;
     --color-text-primary: #0F172A;
     --color-text-secondary: #475569;
-    --color-accent-primary: #B45309;
+    --color-accent-primary: #2563EB;
     --color-accent-hover: #B45309;
     --color-accent-text-on-amber: #FFFFFF;
     --color-focus-ring: #D97706;
     --color-status-success: #059669;
     --color-status-warning: #D97706;
     --color-status-danger: #DC2626;
-    --primary: 26 90% 37%;
-    --ring: 26 90% 37%;
-    --color-accent-primary-rgb: 180 83 9;
+    --primary: 221 83% 53%;
+    --ring: 221 83% 53%;
+    --color-accent-primary-rgb: 37 99 235;
     --color-accent-hover-rgb: 180 83 9;
   /* ==========================================================================
      END FIGMA DESIGN TOKENS
@@ -72,16 +72,16 @@
     --color-border-default: #374151;
     --color-text-primary: #F9FAFB;
     --color-text-secondary: #9CA3AF;
-    --color-accent-primary: #D97706;
+    --color-accent-primary: #2563EB;
     --color-accent-hover: #D97706;
     --color-accent-text-on-amber: #000000;
     --color-focus-ring: #F59E0B;
     --color-status-success: #10B981;
     --color-status-warning: #F59E0B;
     --color-status-danger: #F87171;
-    --primary: 32 95% 44%;
-    --ring: 32 95% 44%;
-    --color-accent-primary-rgb: 217 119 6;
+    --primary: 221 83% 53%;
+    --ring: 221 83% 53%;
+    --color-accent-primary-rgb: 37 99 235;
     --color-accent-hover-rgb: 217 119 6;
   /* ==========================================================================
      END FIGMA DESIGN TOKENS
